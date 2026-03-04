@@ -1,0 +1,830 @@
+---
+import "@styles/shared.css";
+const { githubData } = Astro.props;
+
+// Dynamic years calculation
+const startYear = 2017;
+const currentYear = new Date().getFullYear();
+const yearsOfExperience = currentYear - startYear;
+---
+
+<section
+    id="hero-section"
+    class="hero-wrapper min-h-screen flex items-center justify-center py-8 px-4 md:px-8 relative overflow-hidden"
+>
+    <!-- Corner Decorative Texts -->
+    <div class="corner-text corner-text-tl">
+        <span class="font-mono text-[10px] text-gray-400 tracking-widest"
+            >PASSIONATELY COMMITTED TO</span
+        ><br />
+        <span class="font-mono text-[10px] text-gray-500"
+            >INNOVATIVE SOLUTIONS</span
+        >
+    </div>
+    <div class="corner-text corner-text-tr">
+        <span class="font-mono text-[10px] text-gray-400 tracking-widest"
+            >EXPLORE THE CUTTING-</span
+        ><br />
+        <span class="font-mono text-[10px] text-gray-500">EDGE WORLD OF</span
+        ><br />
+        <span class="font-mono text-[10px] text-lime-400">WEB DEVELOPMENT</span>
+    </div>
+    <div class="corner-text corner-text-bl">
+        <span class="font-mono text-[10px] text-gray-500">CREATING WITH</span
+        ><br />
+        <span class="font-mono text-[10px] text-gray-400">PASSION &</span><br />
+        <span class="font-mono text-[10px] text-lime-400">EXPERTISE</span>
+    </div>
+    <div class="corner-text corner-text-br">
+        <span class="font-mono text-[10px] text-fuchsia-500"
+            >→ INVEST IN THE</span
+        ><br />
+        <span class="font-mono text-[10px] text-fuchsia-400 font-bold"
+            >FUTURE</span
+        >
+    </div>
+
+    <!-- Device Frame Container -->
+    <div class="device-frame">
+        <!-- Frame Corner Accents -->
+        <div class="frame-corner top-left"></div>
+        <div class="frame-corner top-right"></div>
+        <div class="frame-corner bottom-left"></div>
+        <div class="frame-corner bottom-right"></div>
+
+        <!-- Inner Content -->
+        <div class="device-content">
+            <!-- Top Bar -->
+            <div class="device-topbar">
+                <span class="font-mono text-xs text-lime-400 tracking-wider"
+                    >VANDEV</span
+                >
+                <div class="topbar-links">
+                    <span class="text-gray-500 text-xs font-mono">/ GITHUB</span
+                    >
+                    <span class="text-gray-500 text-xs font-mono"
+                        >/ LINKEDIN</span
+                    >
+                    <span class="text-gray-500 text-xs font-mono"
+                        >/ CONTACT</span
+                    >
+                </div>
+            </div>
+
+            <!-- Main Hero Grid -->
+            <div class="hero-grid">
+                <!-- Left Side: Text Content -->
+                <div class="hero-text-side">
+                    <div
+                        class="hero-tag font-mono text-xs text-gray-500 tracking-widest uppercase mb-4"
+                    >
+                        // {yearsOfExperience}+ YEARS BUILDING
+                    </div>
+
+                    <!-- Massive Typography -->
+                    <h1 class="hero-massive">
+                        <span class="hero-line hero-line-1">FULL</span>
+                        <span class="hero-line hero-line-2 text-lime-400"
+                            >STACK</span
+                        >
+                        <span class="hero-line hero-line-3">DEV_</span>
+                    </h1>
+
+                    <p
+                        class="hero-tagline text-gray-400 text-sm md:text-base max-w-sm mt-6 leading-relaxed font-mono"
+                    >
+                        <span class="text-white font-bold">VanDev</span> — crafting <span class="text-lime-400">cutting-edge</span>
+                        web solutions from <span class="text-lime-400"
+                            >Nuevo León, Mexico</span
+                        >.
+                    </p>
+
+                    <!-- CTA -->
+                    <div class="hero-cta mt-8 flex gap-4">
+                        {
+                            githubData && (
+                                <a
+                                    href={githubData.html_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="btn-lime"
+                                >
+                                    VIEW GITHUB →
+                                </a>
+                            )
+                        }
+                    </div>
+                </div>
+
+                <!-- Right Side: Avatar + Info -->
+                <div class="hero-avatar-side">
+                    <!-- Avatar Container -->
+                    <div class="avatar-container" id="glitch-avatar">
+                        <img
+                            src="/75331658.png"
+                            alt="Edgar Olivan"
+                            class="avatar-img"
+                        />
+                        <div class="avatar-scanlines"></div>
+                        <div class="avatar-glitch-overlay"></div>
+                    </div>
+
+                    <!-- Info Cards -->
+                    <div class="info-cards">
+                        <div class="info-card">
+                            <span class="info-label">STATUS</span>
+                            <span class="info-value text-lime-400"
+                                >● AVAILABLE</span
+                            >
+                        </div>
+                        <div class="info-card">
+                            <span class="info-label">LOCATION</span>
+                            <span class="info-value">MX-NL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Info Bar -->
+            <div class="device-bottombar">
+                <div class="bottombar-item">
+                    <span class="text-lime-400 font-bold"
+                        >{yearsOfExperience}+</span
+                    >
+                    <span class="text-gray-400">YRS EXP</span>
+                </div>
+                <div class="bottombar-item">
+                    <span class="text-lime-400 font-bold">50+</span>
+                    <span class="text-gray-400">PROJECTS</span>
+                </div>
+                <div class="bottombar-item">
+                    <span class="text-fuchsia-400 font-bold">∞</span>
+                    <span class="text-gray-400">COFFEE</span>
+                </div>
+                <div class="scroll-indicator">
+                    <span class="text-gray-400 text-xs">SCROLL ↓</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Decorative Diagonal Lines */
+    .diagonal-line {
+        position: absolute;
+        width: 150px;
+        height: 3px;
+        z-index: 1;
+        transform-origin: center;
+    }
+
+    .diagonal-line-1 {
+        bottom: 15%;
+        left: -20px;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            #38bdf8,
+            #38bdf8,
+            transparent
+        );
+        transform: rotate(-45deg);
+        opacity: 0.7;
+    }
+
+    .diagonal-line-2 {
+        top: 20%;
+        left: 10%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            #a855f7,
+            #a855f7,
+            transparent
+        );
+        transform: rotate(-45deg);
+        opacity: 0.5;
+        width: 80px;
+        height: 2px;
+    }
+
+    /* Corner Decorative Texts */
+    .corner-text {
+        position: absolute;
+        z-index: 5;
+        line-height: 1.4;
+        opacity: 0.8;
+    }
+
+    .corner-text-tl {
+        top: 20px;
+        left: 20px;
+        text-align: left;
+    }
+
+    .corner-text-tr {
+        top: 20px;
+        right: 20px;
+        text-align: right;
+    }
+
+    .corner-text-bl {
+        bottom: 80px;
+        left: 20px;
+        text-align: left;
+    }
+
+    .corner-text-br {
+        bottom: 30px;
+        right: 30px;
+        text-align: right;
+    }
+
+    @media (max-width: 768px) {
+        .corner-text {
+            display: none;
+        }
+        .diagonal-line {
+            display: none;
+        }
+    }
+
+    /* Device Frame Container */
+    .device-frame {
+        position: relative;
+        width: 100%;
+        max-width: 1200px;
+        background: var(--color-surface-glass);
+        border: 1px solid rgba(191, 255, 0, 0.2);
+        backdrop-filter: blur(8px);
+        padding: 2px;
+        z-index: 10;
+    }
+
+    .frame-corner {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        border: 2px solid var(--color-accent);
+        z-index: 10;
+    }
+
+    .frame-corner.top-left {
+        top: -2px;
+        left: -2px;
+        border-right: none;
+        border-bottom: none;
+    }
+
+    .frame-corner.top-right {
+        top: -2px;
+        right: -2px;
+        border-left: none;
+        border-bottom: none;
+    }
+
+    .frame-corner.bottom-left {
+        bottom: -2px;
+        left: -2px;
+        border-right: none;
+        border-top: none;
+    }
+
+    .frame-corner.bottom-right {
+        bottom: -2px;
+        right: -2px;
+        border-left: none;
+        border-top: none;
+    }
+
+    .device-content {
+        padding: 1.5rem 2rem;
+    }
+
+    /* Top Bar */
+    .device-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(191, 255, 0, 0.1);
+        margin-bottom: 2rem;
+    }
+
+    .topbar-links {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    /* Hero Grid */
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    @media (min-width: 768px) {
+        .hero-grid {
+            grid-template-columns: 1.2fr 1fr;
+        }
+    }
+
+    /* Massive Typography */
+    .hero-massive {
+        display: flex;
+        flex-direction: column;
+        line-height: 0.9;
+    }
+
+    .hero-line {
+        font-size: clamp(3rem, 12vw, 8rem);
+        font-weight: 900;
+        letter-spacing: -0.05em;
+        text-transform: uppercase;
+    }
+
+    .hero-line-1,
+    .hero-line-3 {
+        color: #fff;
+        -webkit-text-stroke: 1px rgba(191, 255, 0, 0.3);
+    }
+
+    .hero-line-2 {
+        position: relative;
+    }
+
+    .hero-line-3 {
+        opacity: 0.6;
+    }
+
+    /* Button */
+    .btn-lime {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.75rem 1.5rem;
+        background: var(--color-accent);
+        color: #000;
+        font-weight: 700;
+        font-size: 0.75rem;
+        font-family: monospace;
+        letter-spacing: 0.1em;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn-lime:hover {
+        background: #a3e600;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 40px rgba(191, 255, 0, 0.3);
+    }
+
+    /* Avatar Container */
+    .hero-avatar-side {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .avatar-container {
+        position: relative;
+        width: 200px;
+        height: 200px;
+    }
+
+    @media (min-width: 768px) {
+        .avatar-container {
+            width: 280px;
+            height: 280px;
+        }
+    }
+
+    .avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(100%) contrast(1.1);
+        transition: filter 0.5s ease;
+        clip-path: polygon(
+            0% 8%,
+            8% 0%,
+            92% 0%,
+            100% 8%,
+            100% 92%,
+            92% 100%,
+            8% 100%,
+            0% 92%
+        );
+    }
+
+    .avatar-container:hover .avatar-img {
+        filter: grayscale(0%) contrast(1);
+    }
+
+    .avatar-scanlines {
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(191, 255, 0, 0.03) 2px,
+            rgba(191, 255, 0, 0.03) 4px
+        );
+        pointer-events: none;
+        animation: scanlines-scroll 4s linear infinite;
+        clip-path: polygon(
+            0% 8%,
+            8% 0%,
+            92% 0%,
+            100% 8%,
+            100% 92%,
+            92% 100%,
+            8% 100%,
+            0% 92%
+        );
+    }
+
+    @keyframes scanlines-scroll {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: 0 100px;
+        }
+    }
+
+    .avatar-glitch-overlay {
+        position: absolute;
+        inset: -4px;
+        border: 2px solid rgba(191, 255, 0, 0.4);
+        clip-path: polygon(
+            0% 8%,
+            8% 0%,
+            92% 0%,
+            100% 8%,
+            100% 92%,
+            92% 100%,
+            8% 100%,
+            0% 92%
+        );
+        animation: glitch-border 5s infinite;
+    }
+
+    @keyframes glitch-border {
+        0%,
+        90%,
+        100% {
+            transform: translate(0);
+            opacity: 0.4;
+        }
+        92% {
+            transform: translate(-2px, 1px);
+            opacity: 0.8;
+        }
+        94% {
+            transform: translate(2px, -1px);
+            opacity: 0.2;
+        }
+        96% {
+            transform: translate(-1px, 0);
+            opacity: 0.6;
+        }
+    }
+
+    /* Info Cards */
+    .info-cards {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .info-card {
+        display: flex;
+        flex-direction: column;
+        padding: 0.75rem 1rem;
+        border: 1px solid rgba(191, 255, 0, 0.2);
+        background: rgba(0, 0, 0, 0.3);
+        font-family: monospace;
+        font-size: 0.7rem;
+    }
+
+    .info-label {
+        color: #666;
+        margin-bottom: 0.25rem;
+    }
+
+    .info-value {
+        color: #fff;
+        font-weight: 600;
+    }
+
+    /* Bottom Bar */
+    .device-bottombar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(191, 255, 0, 0.1);
+        margin-top: 2rem;
+        font-family: monospace;
+        font-size: 0.7rem;
+    }
+
+    .bottombar-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .scroll-indicator {
+        animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-5px);
+        }
+        60% {
+            transform: translateY(-3px);
+        }
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { PowerGlitch } from "powerglitch";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Initial state - hide elements
+        gsap.set(
+            [
+                ".device-frame",
+                ".device-topbar",
+                ".hero-line",
+                ".hero-tag",
+                ".hero-tagline",
+                ".hero-cta",
+                ".hero-avatar-side",
+                ".device-bottombar",
+                ".info-card",
+            ],
+            {
+                opacity: 0,
+            },
+        );
+
+        // Master timeline for dramatic entry
+        const tl = gsap.timeline({
+            defaults: { ease: "power4.out" },
+            delay: 0.3,
+        });
+
+        // Frame appears first
+        tl.to(".device-frame", {
+            opacity: 1,
+            duration: 0.8,
+            scale: 1,
+            ease: "power2.out",
+        })
+            .from(
+                ".device-frame",
+                {
+                    scale: 0.95,
+                    duration: 0.8,
+                },
+                "<",
+            )
+
+            // Top bar slides in
+            .to(
+                ".device-topbar",
+                {
+                    opacity: 1,
+                    duration: 0.5,
+                },
+                "-=0.3",
+            )
+            .from(
+                ".device-topbar",
+                {
+                    y: -20,
+                    duration: 0.5,
+                },
+                "<",
+            )
+
+            // Massive text - each line staggers with dramatic effect
+            .to(
+                ".hero-line-1",
+                {
+                    opacity: 1,
+                    duration: 0.6,
+                },
+                "-=0.2",
+            )
+            .from(
+                ".hero-line-1",
+                {
+                    x: -100,
+                    duration: 0.6,
+                },
+                "<",
+            )
+
+            .to(
+                ".hero-line-2",
+                {
+                    opacity: 1,
+                    duration: 0.6,
+                },
+                "-=0.3",
+            )
+            .from(
+                ".hero-line-2",
+                {
+                    x: 100,
+                    duration: 0.6,
+                },
+                "<",
+            )
+
+            .to(
+                ".hero-line-3",
+                {
+                    opacity: 0.6,
+                    duration: 0.6,
+                },
+                "-=0.3",
+            )
+            .from(
+                ".hero-line-3",
+                {
+                    x: -50,
+                    duration: 0.6,
+                },
+                "<",
+            )
+
+            // Tag and tagline
+            .to(
+                ".hero-tag",
+                {
+                    opacity: 1,
+                    duration: 0.4,
+                },
+                "-=0.4",
+            )
+            .from(
+                ".hero-tag",
+                {
+                    y: 20,
+                    duration: 0.4,
+                },
+                "<",
+            )
+
+            .to(
+                ".hero-tagline",
+                {
+                    opacity: 1,
+                    duration: 0.4,
+                },
+                "-=0.2",
+            )
+            .from(
+                ".hero-tagline",
+                {
+                    y: 20,
+                    duration: 0.4,
+                },
+                "<",
+            )
+
+            // CTA button
+            .to(
+                ".hero-cta",
+                {
+                    opacity: 1,
+                    duration: 0.4,
+                },
+                "-=0.1",
+            )
+            .from(
+                ".hero-cta",
+                {
+                    y: 20,
+                    duration: 0.4,
+                },
+                "<",
+            )
+
+            // Avatar side slides in from right
+            .to(
+                ".hero-avatar-side",
+                {
+                    opacity: 1,
+                    duration: 0.8,
+                },
+                "-=0.6",
+            )
+            .from(
+                ".hero-avatar-side",
+                {
+                    x: 80,
+                    duration: 0.8,
+                },
+                "<",
+            )
+
+            // Info cards pop in
+            .to(
+                ".info-card",
+                {
+                    opacity: 1,
+                    stagger: 0.1,
+                    duration: 0.3,
+                },
+                "-=0.4",
+            )
+            .from(
+                ".info-card",
+                {
+                    y: 20,
+                    stagger: 0.1,
+                    duration: 0.3,
+                },
+                "<",
+            )
+
+            // Bottom bar
+            .to(
+                ".device-bottombar",
+                {
+                    opacity: 1,
+                    duration: 0.4,
+                },
+                "-=0.2",
+            )
+            .from(
+                ".device-bottombar",
+                {
+                    y: 20,
+                    duration: 0.4,
+                },
+                "<",
+            );
+
+        // Parallax on scroll - subtle movement without hiding
+        gsap.to(".device-frame", {
+            scrollTrigger: {
+                trigger: "#hero-section",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+            },
+            y: -50,
+            scale: 0.98,
+        });
+
+        // PowerGlitch on avatar
+        setTimeout(() => {
+            PowerGlitch.glitch("#glitch-avatar", {
+                playMode: "always",
+                createContainers: true,
+                hideOverflow: false,
+                timing: {
+                    duration: 4000,
+                    iterations: Infinity,
+                },
+                glitchTimeSpan: {
+                    start: 0.5,
+                    end: 0.6,
+                },
+                shake: {
+                    velocity: 10,
+                    amplitudeX: 0.01,
+                    amplitudeY: 0.01,
+                },
+                slice: {
+                    count: 5,
+                    velocity: 12,
+                    minHeight: 0.01,
+                    maxHeight: 0.05,
+                    hueRotate: true,
+                },
+            });
+        }, 1000);
+    });
+</script>

@@ -1,0 +1,150 @@
+---
+// ScrollAnimations.astro - Global GSAP ScrollTrigger effects for all sections
+---
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // =====================
+        // SECTION REVEAL ANIMATIONS
+        // =====================
+
+        const sections = document.querySelectorAll(
+            "#about, #skills, #projects, #contact",
+        );
+
+        sections.forEach((section) => {
+            // Section title - dramatic scale and fade
+            const title = section.querySelector(".section-title");
+            if (title) {
+                // Set initial state
+                gsap.set(title, { opacity: 0, y: 60 });
+
+                gsap.to(title, {
+                    scrollTrigger: {
+                        trigger: title,
+                        start: "top 90%",
+                        toggleActions: "play none none none",
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power3.out",
+                });
+            }
+
+            // Subsection titles
+            const subtitles = section.querySelectorAll(".subsection-title");
+            subtitles.forEach((subtitle, index) => {
+                gsap.set(subtitle, {
+                    opacity: 0,
+                    x: index % 2 === 0 ? -40 : 40,
+                });
+
+                gsap.to(subtitle, {
+                    scrollTrigger: {
+                        trigger: subtitle,
+                        start: "top 90%",
+                        toggleActions: "play none none none",
+                    },
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: "power2.out",
+                });
+            });
+        });
+
+        // =====================
+        // PROJECT CARDS
+        // =====================
+
+        const projectCards = document.querySelectorAll(
+            ".project-item, .project-card",
+        );
+        projectCards.forEach((card, index) => {
+            gsap.set(card, { opacity: 0, y: 60 });
+
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%",
+                    toggleActions: "play none none none",
+                },
+                y: 0,
+                opacity: 1,
+                duration: 0.6,
+                delay: index * 0.1,
+                ease: "power2.out",
+            });
+        });
+
+        // =====================
+        // CONTACT SECTION
+        // =====================
+
+        const contactSection = document.querySelector("#contact");
+        if (contactSection) {
+            const contactTitle = contactSection.querySelector(".section-title");
+            if (contactTitle) {
+                gsap.set(contactTitle, { opacity: 0, y: 40 });
+
+                gsap.to(contactTitle, {
+                    scrollTrigger: {
+                        trigger: contactSection,
+                        start: "top 80%",
+                        toggleActions: "play none none none",
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power3.out",
+                });
+            }
+
+            const contactBtn = contactSection.querySelector("a");
+            if (contactBtn) {
+                gsap.set(contactBtn, { opacity: 0, y: 30 });
+
+                gsap.to(contactBtn, {
+                    scrollTrigger: {
+                        trigger: contactSection,
+                        start: "top 75%",
+                        toggleActions: "play none none none",
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    delay: 0.2,
+                    ease: "power2.out",
+                });
+            }
+        }
+
+        // =====================
+        // PREMIUM GLASS PANELS - HOVER GLOW
+        // =====================
+
+        const glassPanels = document.querySelectorAll(".premium-glass-panel");
+        glassPanels.forEach((panel) => {
+            panel.addEventListener("mouseenter", () => {
+                gsap.to(panel, {
+                    boxShadow: "0 0 40px rgba(191, 255, 0, 0.15)",
+                    borderColor: "rgba(191, 255, 0, 0.3)",
+                    duration: 0.3,
+                });
+            });
+            panel.addEventListener("mouseleave", () => {
+                gsap.to(panel, {
+                    boxShadow: "none",
+                    borderColor: "rgba(191, 255, 0, 0.1)",
+                    duration: 0.3,
+                });
+            });
+        });
+    });
+</script>

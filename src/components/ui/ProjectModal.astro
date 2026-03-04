@@ -1,0 +1,724 @@
+---
+// ProjectModal.astro - Terminal Style
+import "@styles/shared.css";
+
+interface Props {
+    id?: string;
+}
+
+const { id = "project-modal" } = Astro.props;
+---
+
+<dialog
+    id={id}
+    class="modal-backdrop fixed inset-0 z-[100] w-screen h-screen bg-black/90 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500"
+    aria-hidden="true"
+>
+    <!-- Terminal Window Container -->
+    <div
+        class="terminal-window relative w-[95%] max-w-5xl h-[90vh] max-h-[850px] overflow-hidden flex flex-col"
+    >
+        <!-- Device Frame Corners -->
+        <div
+            class="corner corner-tl absolute top-0 left-0 w-10 h-10 border-t-2 border-l-2 border-lime-400 z-30"
+        >
+        </div>
+        <div
+            class="corner corner-tr absolute top-0 right-0 w-10 h-10 border-t-2 border-r-2 border-lime-400 z-30"
+        >
+        </div>
+        <div
+            class="corner corner-bl absolute bottom-0 left-0 w-10 h-10 border-b-2 border-l-2 border-lime-400 z-30"
+        >
+        </div>
+        <div
+            class="corner corner-br absolute bottom-0 right-0 w-10 h-10 border-b-2 border-r-2 border-lime-400 z-30"
+        >
+        </div>
+
+        <!-- Terminal Header Bar -->
+        <header
+            class="terminal-header relative z-20 flex items-center justify-between px-6 py-3 border-b border-lime-500/30 bg-black"
+        >
+            <div class="flex items-center gap-4">
+                <!-- Traffic Lights -->
+                <div class="traffic-lights flex items-center gap-2">
+                    <button
+                        id="close-modal-btn"
+                        class="traffic-light close w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors cursor-pointer"
+                        aria-label="Close"></button>
+                    <div
+                        class="traffic-light w-3 h-3 rounded-full bg-yellow-500"
+                    >
+                    </div>
+                    <div class="traffic-light w-3 h-3 rounded-full bg-lime-400">
+                    </div>
+                </div>
+
+                <!-- Terminal Title -->
+                <div
+                    class="terminal-title font-mono text-sm text-lime-400/70 flex items-center gap-2"
+                >
+                    <span class="typing-cursor">▋</span>
+                    <span id="terminal-path"
+                        >~/projects/<span
+                            id="modal-project-slug"
+                            class="text-lime-400">PROJECT_NAME</span
+                        ></span
+                    >
+                </div>
+            </div>
+
+            <div
+                class="terminal-status flex items-center gap-4 font-mono text-xs text-gray-500"
+            >
+                <span class="flex items-center gap-2">
+                    <span
+                        class="status-dot w-2 h-2 bg-lime-400 rounded-full animate-pulse"
+                    ></span>
+                    <span id="modal-status">LOADING...</span>
+                </span>
+                <span class="text-lime-500/30">|</span>
+                <span id="modal-category-tag">TYPE: REACT</span>
+            </div>
+        </header>
+
+        <!-- Scanlines Overlay -->
+        <div
+            class="scanlines absolute inset-0 pointer-events-none opacity-20 z-10"
+        >
+        </div>
+
+        <!-- Main Content Area -->
+        <div
+            class="terminal-body flex-1 overflow-hidden bg-surface border-x border-lime-500/20 relative"
+        >
+            <!-- Background Grid -->
+            <div
+                class="absolute inset-0 bg-[linear-gradient(rgba(191,255,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(191,255,0,0.02)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"
+            >
+            </div>
+
+            <div
+                class="grid grid-cols-1 lg:grid-cols-12 gap-0 h-full overflow-y-auto custom-scrollbar relative z-10"
+            >
+                <!-- Left Column: Visual Display -->
+                <div
+                    class="lg:col-span-7 border-b lg:border-b-0 lg:border-r border-lime-500/10 p-6 flex flex-col gap-6"
+                >
+                    <!-- Image Display with Device Frame -->
+                    <div class="image-display relative">
+                        <div
+                            class="image-frame relative border border-lime-500/30 bg-black overflow-hidden"
+                        >
+                            <!-- Image Header -->
+                            <div
+                                class="image-header flex items-center justify-between px-3 py-2 border-b border-lime-500/20 bg-black/80"
+                            >
+                                <span class="font-mono text-xs text-lime-400/50"
+                                    >OUTPUT_PREVIEW</span
+                                >
+                                <span class="font-mono text-xs text-gray-600"
+                                    >IMG_001</span
+                                >
+                            </div>
+
+                            <div
+                                id="gallery-container"
+                                class="relative aspect-video overflow-hidden cursor-zoom-in"
+                                role="button"
+                                tabindex="0"
+                                aria-label="Click to enlarge image"
+                            >
+                                <img
+                                    id="modal-image"
+                                    src=""
+                                    alt="Project Preview"
+                                    class="w-full h-full object-cover"
+                                />
+                                <!-- Glitch Effect Overlay -->
+                                <div
+                                    class="glitch-overlay absolute inset-0 pointer-events-none"
+                                >
+                                </div>
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none"
+                                >
+                                </div>
+                                <!-- Zoom hint -->
+                                <div class="absolute bottom-2 right-2 font-mono text-xs text-lime-400/50 flex items-center gap-1 pointer-events-none">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                                    CLICK TO EXPAND
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tech Stack Tags - Terminal Output Style -->
+                    <div class="tech-output">
+                        <div
+                            class="output-header font-mono text-xs text-gray-500 mb-3 flex items-center gap-2"
+                        >
+                            <span class="text-lime-400">$</span> detect --technologies
+                        </div>
+                        <div id="modal-tags" class="flex flex-wrap gap-2">
+                            <!-- Tags injected via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Terminal Output -->
+                <div
+                    class="lg:col-span-5 p-6 lg:p-8 flex flex-col gap-6 bg-gradient-to-br from-transparent to-lime-900/5"
+                >
+                    <!-- Project Title Section -->
+                    <div class="title-section">
+                        <div
+                            class="font-mono text-xs text-gray-500 mb-2 flex items-center gap-2"
+                        >
+                            <span class="text-lime-400">$</span> cat README.md
+                        </div>
+                        <h2
+                            id="modal-title"
+                            class="text-3xl font-black text-white uppercase tracking-tight leading-tight"
+                        >
+                            PROJECT_NAME
+                        </h2>
+                        <div
+                            id="modal-category"
+                            class="font-mono text-xs text-lime-400/70 mt-2"
+                        >
+                            // CATEGORY: REACT
+                        </div>
+                    </div>
+
+                    <!-- Description - Terminal Output -->
+                    <section class="description-section">
+                        <div
+                            class="font-mono text-xs text-gray-500 mb-2 flex items-center gap-2"
+                        >
+                            <span class="text-lime-400">$</span> cat description.txt
+                        </div>
+                        <div
+                            class="terminal-output border-l-2 border-lime-500/30 pl-4"
+                        >
+                            <p
+                                id="modal-description"
+                                class="text-gray-300 leading-relaxed font-mono text-sm"
+                            >
+                                <!-- Description injected JS -->
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Challenges Section - Warning Style -->
+                    <section
+                        class="challenge-section border border-lime-500/20 bg-lime-500/5 p-4"
+                    >
+                        <div
+                            class="font-mono text-xs text-lime-400 mb-3 flex items-center gap-2 uppercase tracking-wider"
+                        >
+                            <svg
+                                class="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            TECHNICAL_CHALLENGE
+                        </div>
+                        <p
+                            id="modal-challenge"
+                            class="text-gray-400 text-sm leading-relaxed font-mono"
+                        >
+                            <!-- Challenge injected JS -->
+                        </p>
+                    </section>
+
+                    <!-- Action Section -->
+                    <div
+                        class="action-section mt-auto pt-6 border-t border-lime-500/10"
+                    >
+                        <div
+                            class="flex justify-between items-center mb-4 font-mono text-xs"
+                        >
+                            <span class="text-gray-600">ACCESS_LEVEL</span>
+                            <span id="access-level" class="text-lime-400"
+                                >GRANTED</span
+                            >
+                        </div>
+
+                        <!-- Primary CTA Button -->
+                        <a
+                            id="modal-cta"
+                            href="#"
+                            target="_blank"
+                            class="cta-button flex w-full items-center justify-center gap-3 py-4 px-6 font-mono font-bold text-sm uppercase tracking-wider transition-all"
+                        >
+                            <span id="modal-cta-text">LAUNCH SYSTEM</span>
+                            <svg
+                                class="w-5 h-5 transition-transform group-hover:translate-x-1"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+
+                        <div
+                            id="modal-private-notice"
+                            class="hidden mt-4 text-center py-3 px-6 border border-red-500/30 bg-red-500/5 text-red-400 font-mono text-xs uppercase tracking-wider"
+                        >
+                            <span
+                                class="flex items-center justify-center gap-2"
+                            >
+                                <svg
+                                    class="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                                    ></path>
+                                </svg>
+                                RESTRICTED // PRIVATE_REPOSITORY
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terminal Footer Bar -->
+        <footer
+            class="terminal-footer relative z-20 flex items-center justify-between px-6 py-2 border-t border-lime-500/30 bg-black font-mono text-xs"
+        >
+            <span class="text-gray-600">
+                <span class="text-lime-400">❯</span> Press ESC to close
+            </span>
+            <span class="text-gray-600">
+                SESSION: <span class="text-lime-400">ACTIVE</span>
+            </span>
+        </footer>
+    </div>
+
+    <!-- Lightbox Overlay -->
+    <div
+        id="image-lightbox"
+        class="fixed inset-0 z-[200] bg-black/95 backdrop-blur-sm flex items-center justify-center cursor-zoom-out opacity-0 pointer-events-none transition-opacity duration-300"
+        role="dialog"
+        aria-label="Enlarged image view"
+    >
+        <img
+            id="lightbox-image"
+            src=""
+            alt="Enlarged project preview"
+            class="max-w-[90vw] max-h-[90vh] object-contain"
+        />
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-xs text-gray-500">
+            CLICK OR ESC TO CLOSE
+        </div>
+    </div>
+</dialog>
+
+<style>
+    /* Terminal Window Styling */
+    .terminal-window {
+        background: var(--color-surface);
+        border: 1px solid rgba(191, 255, 0, 0.3);
+        box-shadow:
+            0 0 0 1px rgba(191, 255, 0, 0.1),
+            0 25px 50px -12px rgba(0, 0, 0, 0.8),
+            0 0 100px rgba(191, 255, 0, 0.1);
+        transform: scale(0.9) translateY(20px);
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    dialog[open] .terminal-window {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+
+    /* Corner Animation */
+    .corner {
+        transition: all 0.3s ease;
+    }
+
+    dialog[open] .corner-tl {
+        animation: corner-tl 0.5s ease 0.2s both;
+    }
+    dialog[open] .corner-tr {
+        animation: corner-tr 0.5s ease 0.3s both;
+    }
+    dialog[open] .corner-bl {
+        animation: corner-bl 0.5s ease 0.4s both;
+    }
+    dialog[open] .corner-br {
+        animation: corner-br 0.5s ease 0.5s both;
+    }
+
+    @keyframes corner-tl {
+        from {
+            transform: translate(10px, 10px);
+            opacity: 0;
+        }
+        to {
+            transform: translate(0, 0);
+            opacity: 1;
+        }
+    }
+    @keyframes corner-tr {
+        from {
+            transform: translate(-10px, 10px);
+            opacity: 0;
+        }
+        to {
+            transform: translate(0, 0);
+            opacity: 1;
+        }
+    }
+    @keyframes corner-bl {
+        from {
+            transform: translate(10px, -10px);
+            opacity: 0;
+        }
+        to {
+            transform: translate(0, 0);
+            opacity: 1;
+        }
+    }
+    @keyframes corner-br {
+        from {
+            transform: translate(-10px, -10px);
+            opacity: 0;
+        }
+        to {
+            transform: translate(0, 0);
+            opacity: 1;
+        }
+    }
+
+    /* Typing Cursor */
+    .typing-cursor {
+        color: var(--color-accent);
+        animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+        0%,
+        100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+    }
+
+    /* Scanlines Effect */
+    .scanlines {
+        background: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.3) 2px,
+            rgba(0, 0, 0, 0.3) 4px
+        );
+        animation: scanline-move 10s linear infinite;
+    }
+
+    @keyframes scanline-move {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: 0 100%;
+        }
+    }
+
+    /* Glitch Overlay */
+    .glitch-overlay {
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(191, 255, 0, 0.03) 50%,
+            transparent 100%
+        );
+        animation: glitch-scan 3s ease-in-out infinite;
+    }
+
+    @keyframes glitch-scan {
+        0%,
+        100% {
+            transform: translateX(-100%);
+        }
+        50% {
+            transform: translateX(100%);
+        }
+    }
+
+    /* CTA Button - Angular Brutalist Style */
+    .cta-button {
+        background: linear-gradient(135deg, var(--color-accent), #84cc16);
+        color: #000;
+        clip-path: polygon(
+            0 0,
+            calc(100% - 12px) 0,
+            100% 12px,
+            100% 100%,
+            12px 100%,
+            0 calc(100% - 12px)
+        );
+        box-shadow: 0 0 30px rgba(191, 255, 0, 0.3);
+    }
+
+    .cta-button:hover {
+        background: linear-gradient(135deg, #d4ff33, #a3e635);
+        box-shadow: 0 0 50px rgba(191, 255, 0, 0.5);
+        transform: translateY(-2px);
+    }
+
+    /* Custom Scrollbar */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.3);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(191, 255, 0, 0.3);
+        border-radius: 3px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(191, 255, 0, 0.5);
+    }
+
+    /* Modal Open/Close States */
+    dialog[open] {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Image Frame */
+    .image-frame {
+        clip-path: polygon(
+            0 0,
+            100% 0,
+            100% calc(100% - 8px),
+            calc(100% - 8px) 100%,
+            0 100%
+        );
+    }
+
+    /* Traffic Light Hover */
+    .traffic-light.close:hover {
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+    }
+</style>
+
+<script>
+    import gsap from "gsap";
+
+    const modal = document.getElementById("project-modal") as HTMLDialogElement;
+    const closeBtn = document.getElementById("close-modal-btn");
+    const terminalWindow = modal?.querySelector(".terminal-window");
+
+    // Close function with GSAP animation
+    function closeModal() {
+        if (!modal || !terminalWindow) return;
+
+        // Animate out
+        gsap.to(terminalWindow, {
+            scale: 0.9,
+            opacity: 0,
+            y: 20,
+            duration: 0.3,
+            ease: "power2.in",
+            onComplete: () => {
+                modal.classList.remove("opacity-100", "pointer-events-auto");
+                modal.classList.add("opacity-0", "pointer-events-none");
+                modal.close();
+            },
+        });
+    }
+
+    // Event Listeners
+    closeBtn?.addEventListener("click", closeModal);
+
+    // Check for clicks outside the terminal window
+    modal?.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // ESC key to close
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal?.open) {
+            closeModal();
+        }
+    });
+
+    // Lightbox logic
+    const galleryContainer = document.getElementById("gallery-container");
+    const lightbox = document.getElementById("image-lightbox");
+    const lightboxImage = document.getElementById("lightbox-image") as HTMLImageElement;
+
+    function openLightbox() {
+        const modalImage = document.getElementById("modal-image") as HTMLImageElement;
+        if (!lightbox || !lightboxImage || !modalImage || !modalImage.src) return;
+
+        lightboxImage.src = modalImage.src;
+        lightbox.classList.remove("opacity-0", "pointer-events-none");
+        lightbox.classList.add("opacity-100", "pointer-events-auto");
+
+        gsap.fromTo(lightboxImage,
+            { scale: 0.8, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" }
+        );
+    }
+
+    function closeLightbox() {
+        if (!lightbox || !lightboxImage) return;
+
+        gsap.to(lightboxImage, {
+            scale: 0.8, opacity: 0, duration: 0.25, ease: "power2.in",
+            onComplete: () => {
+                lightbox.classList.remove("opacity-100", "pointer-events-auto");
+                lightbox.classList.add("opacity-0", "pointer-events-none");
+            }
+        });
+    }
+
+    galleryContainer?.addEventListener("click", openLightbox);
+    lightbox?.addEventListener("click", closeLightbox);
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox?.classList.contains("opacity-100")) {
+            e.stopPropagation();
+            closeLightbox();
+        }
+    });
+
+    // Expose open function globally so ProjectsSection can call it
+    (window as any).openProjectModal = (projectData: any) => {
+        if (!modal) return;
+
+        // Populate Data
+        const titleEl = document.getElementById("modal-title");
+        const slugEl = document.getElementById("modal-project-slug");
+        const categoryEl = document.getElementById("modal-category");
+        const categoryTagEl = document.getElementById("modal-category-tag");
+        const descEl = document.getElementById("modal-description");
+        const challengeEl = document.getElementById("modal-challenge");
+        const imageEl = document.getElementById(
+            "modal-image",
+        ) as HTMLImageElement;
+        const statusEl = document.getElementById("modal-status");
+        const accessEl = document.getElementById("access-level");
+
+        if (titleEl) titleEl.innerText = projectData.name;
+        if (slugEl)
+            slugEl.innerText = projectData.name
+                .toLowerCase()
+                .replace(/\s+/g, "-");
+        if (categoryEl)
+            categoryEl.innerText = `// CATEGORY: ${projectData.category.toUpperCase()}`;
+        if (categoryTagEl)
+            categoryTagEl.innerText = `TYPE: ${projectData.category.toUpperCase()}`;
+        if (descEl) descEl.innerText = projectData.description;
+        if (challengeEl)
+            challengeEl.innerText =
+                projectData.challenge ||
+                "No technical challenge data available.";
+        if (imageEl)
+            imageEl.src =
+                projectData.image || "/images/projects/placeholder.png";
+        if (statusEl) statusEl.innerText = "LOADED";
+        if (accessEl)
+            accessEl.innerText = projectData.repoUrl ? "GRANTED" : "RESTRICTED";
+
+        // Tags - Terminal Style (sanitized, no innerHTML)
+        const tagsContainer = document.getElementById("modal-tags");
+        if (tagsContainer) {
+            tagsContainer.replaceChildren();
+            projectData.languages.forEach((lang: string) => {
+                const tag = document.createElement("span");
+                tag.className = "tech-tag font-mono text-xs px-3 py-1.5 bg-lime-500/10 text-lime-300 border border-lime-500/30 uppercase tracking-wider";
+                tag.textContent = lang;
+                tagsContainer.appendChild(tag);
+            });
+        }
+
+        // CTA Logic
+        const ctaBtn = document.getElementById(
+            "modal-cta",
+        ) as HTMLAnchorElement;
+        const ctaText = document.getElementById("modal-cta-text");
+        const privateNotice = document.getElementById("modal-private-notice");
+
+        const targetUrl = projectData.demoUrl || projectData.repoUrl;
+
+        if (targetUrl && ctaBtn && ctaText && privateNotice) {
+            ctaBtn.href = targetUrl;
+            ctaBtn.classList.remove("hidden");
+            ctaBtn.classList.add("flex");
+            ctaText.innerText = projectData.demoUrl
+                ? "LAUNCH LIVE DEMO"
+                : "VIEW REPOSITORY";
+            privateNotice.classList.add("hidden");
+        } else if (ctaBtn && privateNotice) {
+            ctaBtn.classList.add("hidden");
+            ctaBtn.classList.remove("flex");
+            privateNotice.classList.remove("hidden");
+        }
+
+        // Show Modal with GSAP animation
+        modal.showModal();
+        modal.classList.remove("opacity-0", "pointer-events-none");
+        modal.classList.add("opacity-100", "pointer-events-auto");
+
+        // Animate terminal window entrance
+        gsap.fromTo(
+            terminalWindow,
+            { scale: 0.9, opacity: 0, y: 20 },
+            { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        );
+
+        // Animate corners
+        gsap.fromTo(
+            ".corner",
+            { opacity: 0 },
+            { opacity: 1, duration: 0.3, stagger: 0.1, delay: 0.2 },
+        );
+
+        // Typing effect for status
+        if (statusEl) {
+            statusEl.innerText = "";
+            const text = "LOADED";
+            let i = 0;
+            const typeInterval = setInterval(() => {
+                if (i < text.length) {
+                    statusEl.innerText += text[i];
+                    i++;
+                } else {
+                    clearInterval(typeInterval);
+                }
+            }, 50);
+        }
+    };
+</script>

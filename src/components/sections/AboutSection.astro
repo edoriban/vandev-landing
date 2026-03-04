@@ -1,0 +1,454 @@
+---
+import "@styles/shared.css";
+import SkillsCarousel from "./SkillsCarousel.astro";
+
+const startYear = 2017;
+const currentYear = new Date().getFullYear();
+const yearsOfExperience = currentYear - startYear;
+
+const workExperience = [
+    {
+        title: "Freelance Software Developer",
+        company: "VanDev",
+        period: "2025 - Present",
+        description:
+            "Working as an independent developer on a per-project basis. Building web applications, desktop tools, and SaaS products using Rust, TypeScript, React, and Python.",
+        tags: ["Rust", "TypeScript", "React", "Python", "Tauri"]
+    },
+    {
+        title: "Software Engineer",
+        company: "Industrial-Code",
+        period: "2022 - Present",
+        description:
+            "Working as a software engineer on multiple projects. Primarily using TypeScript, React, Node.js, and Python.",
+        tags: ["TypeScript", "React", "Node.js", "Python"]
+    },
+    {
+        title: "Fullstack Developer",
+        company: "Insytech",
+        period: "2018 - Present",
+        description:
+            "Developing production control software for Polaris. Primarily using Visual Basic, JavaScript, and C#.",
+        tags: ["VB.NET", "JavaScript", "C#", "SQL Server"]
+    },
+    {
+        title: "Junior Developer",
+        company: "TSI",
+        period: "2017 - 2018",
+        description:
+            "SQL Server database management, Atlas Copco industrial tools integration, and SCADA programming.",
+        tags: ["SQL Server", "VBScript", "SCADA"]
+    },
+];
+
+const education = [
+    {
+        degree: "Software Engineering",
+        institution: "Universidad del Norte, A.C.",
+        topics: ["Design Patterns", "ASP.NET", "Entity Framework", "SQL Server"]
+    },
+];
+---
+
+<section id="about" class="about-section relative">
+    <!-- Section Container with Device Frame -->
+    <div class="container mx-auto px-4 max-w-6xl">
+        
+        <!-- Section Header with Device Frame -->
+        <div class="section-header mb-16">
+            <div class="header-device-frame relative border border-lime-500/30 bg-black/60 p-8 max-w-2xl">
+                <!-- Corner Brackets -->
+                <div class="corner-tl absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-lime-400"></div>
+                <div class="corner-tr absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-lime-400"></div>
+                <div class="corner-bl absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-lime-400"></div>
+                <div class="corner-br absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-lime-400"></div>
+                
+                <div class="header-tag font-mono text-xs text-lime-400 tracking-widest mb-4">
+                    // ABOUT.ME
+                </div>
+                <h1 class="section-title text-5xl md:text-6xl lg:text-7xl font-black text-white leading-none">
+                    PROFESSIONAL<br/>
+                    <span class="text-lime-400">JOURNEY_</span>
+                </h1>
+                <div class="header-status font-mono text-xs text-gray-500 mt-4 flex items-center gap-4">
+                    <span class="flex items-center gap-2">
+                        <span class="status-dot w-2 h-2 bg-lime-400 rounded-full animate-pulse"></span>
+                        PROFILE.LOADED
+                    </span>
+                    <span class="text-lime-500/50">|</span>
+                    <span>EXP: {yearsOfExperience}+ YEARS</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Bar with Counter Animation -->
+        <div class="stats-bar flex flex-wrap justify-between gap-8 mb-16 p-6 border border-lime-500/30 bg-black/20">
+            <div class="stat font-mono">
+                <span class="counter-value block text-3xl md:text-4xl font-bold text-lime-400" data-count={yearsOfExperience}>0</span>
+                <span class="text-xs text-gray-500 tracking-wider">YEARS EXPERIENCE</span>
+            </div>
+            <div class="stat font-mono">
+                <span class="counter-value block text-3xl md:text-4xl font-bold text-white" data-count="3">0</span>
+                <span class="text-xs text-gray-500 tracking-wider">COMPANIES</span>
+            </div>
+            <div class="stat font-mono">
+                <span class="counter-value block text-3xl md:text-4xl font-bold text-white" data-count="50">0</span>
+                <span class="text-xs text-gray-500 tracking-wider">PROJECTS</span>
+            </div>
+            <div class="stat font-mono">
+                <span class="block text-3xl md:text-4xl font-bold text-lime-400">∞</span>
+                <span class="text-xs text-gray-500 tracking-wider">LINES OF CODE</span>
+            </div>
+        </div>
+
+        <!-- Work Experience Grid -->
+        <div class="experience-section mb-20">
+            <h2 class="subsection-title font-mono text-sm text-lime-400 tracking-widest mb-8 flex items-center gap-4">
+                <span class="w-8 h-px bg-lime-400"></span>
+                WORK_EXPERIENCE
+            </h2>
+
+            <div class="experience-grid space-y-6">
+                {workExperience.map((job, index) => (
+                    <div class={`experience-card experience-item-${index} group`}>
+                        <!-- Card Frame -->
+                        <div class="card-frame relative p-6 border border-lime-500/20 bg-black/30 hover:border-lime-400/50 transition-all duration-300">
+                            <!-- Corner Accents -->
+                            <div class="corner-tl absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-lime-400"></div>
+                            <div class="corner-br absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-lime-400"></div>
+                            
+                            <!-- Header Row -->
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl md:text-2xl font-bold text-white group-hover:text-lime-400 transition-colors">
+                                        {job.title}
+                                    </h3>
+                                    <span class="text-lime-400 font-mono text-sm">@ {job.company}</span>
+                                </div>
+                                <span class="font-mono text-xs text-gray-500 mt-2 md:mt-0 tracking-wider">
+                                    [{job.period}]
+                                </span>
+                            </div>
+                            
+                            <!-- Description -->
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                {job.description}
+                            </p>
+                            
+                            <!-- Tags -->
+                            <div class="flex flex-wrap gap-2">
+                                {job.tags.map(tag => (
+                                    <span class="tag px-3 py-1 text-xs font-mono bg-lime-500/10 text-lime-300 border border-lime-500/30">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <!-- Education Section -->
+        <div class="education-section mb-20">
+            <h2 class="subsection-title font-mono text-sm text-lime-400 tracking-widest mb-8 flex items-center gap-4">
+                <span class="w-8 h-px bg-lime-400"></span>
+                EDUCATION
+            </h2>
+
+            <div class="education-grid">
+                {education.map((edu, index) => (
+                    <div class={`education-card education-item-${index} group`}>
+                        <div class="card-frame relative p-6 border border-lime-500/20 bg-black/30 hover:border-lime-400/50 transition-all duration-300">
+                            <div class="corner-tl absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-lime-400"></div>
+                            <div class="corner-br absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-lime-400"></div>
+                            
+                            <h3 class="text-xl font-bold text-white group-hover:text-lime-400 transition-colors mb-2">
+                                {edu.degree}
+                            </h3>
+                            <span class="text-lime-400 font-mono text-sm block mb-4">@ {edu.institution}</span>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                {edu.topics.map(topic => (
+                                    <span class="tag px-3 py-1 text-xs font-mono bg-lime-500/10 text-lime-300 border border-lime-500/30">
+                                        {topic}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="skills-section mt-8">
+            <SkillsCarousel />
+        </div>
+    </div>
+</section>
+
+<style>
+    .about-section {
+        position: relative;
+    }
+
+    /* Section Header */
+    .section-header {
+        position: relative;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+        /* No clip-path - keep rectangular */
+    }
+
+    .stat {
+        border-left: 2px solid rgba(191, 255, 0, 0.3);
+        padding-left: 1.5rem;
+    }
+
+    .stat:first-child {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    /* Experience Cards */
+    .experience-card {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    .education-card {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    /* Hover Effects */
+    .card-frame:hover {
+        box-shadow: 0 0 30px rgba(191, 255, 0, 0.1);
+    }
+
+    /* Tags */
+    .tag {
+        transition: all 0.3s ease;
+    }
+
+    .card-frame:hover .tag {
+        background: rgba(191, 255, 0, 0.2);
+        border-color: rgba(191, 255, 0, 0.5);
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Section Header Animation - About specific selectors
+        const aboutFrame = document.querySelector("#about .header-device-frame");
+        const aboutTag = document.querySelector("#about .header-tag");
+        const aboutTitle = document.querySelector("#about .section-title");
+        const aboutStatus = document.querySelector("#about .header-status");
+        
+        if (aboutFrame) {
+            gsap.set(aboutFrame, { opacity: 0, x: -50 });
+            gsap.to(aboutFrame, {
+                scrollTrigger: {
+                    trigger: "#about",
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                x: 0,
+                duration: 0.6,
+                ease: "power3.out"
+            });
+        }
+        
+        if (aboutTag) {
+            gsap.set(aboutTag, { opacity: 0, x: -30 });
+            gsap.to(aboutTag, {
+                scrollTrigger: {
+                    trigger: "#about",
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                x: 0,
+                duration: 0.5,
+                delay: 0.2
+            });
+        }
+        
+        if (aboutTitle) {
+            gsap.set(aboutTitle, { opacity: 0, y: 50 });
+            gsap.to(aboutTitle, {
+                scrollTrigger: {
+                    trigger: "#about",
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: 0.3,
+                ease: "power3.out"
+            });
+        }
+        
+        if (aboutStatus) {
+            gsap.set(aboutStatus, { opacity: 0 });
+            gsap.to(aboutStatus, {
+                scrollTrigger: {
+                    trigger: "#about",
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                duration: 0.5,
+                delay: 0.5
+            });
+        }
+
+        // Stats Bar - Counter Animation
+        const statsBar = document.querySelector("#about .stats-bar");
+        if (statsBar) {
+            gsap.set(statsBar, { opacity: 0, scaleX: 0.8, transformOrigin: "left center" });
+            gsap.to(statsBar, {
+                scrollTrigger: {
+                    trigger: statsBar,
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                scaleX: 1,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+        }
+
+        // Counter Animation for stats
+        const counterElements = document.querySelectorAll('.counter-value');
+        counterElements.forEach((counter) => {
+            const element = counter as HTMLElement;
+            const target = parseInt(element.dataset.count || '0');
+            
+            gsap.set(element, { opacity: 0, y: 20 });
+            
+            gsap.to(element, {
+                scrollTrigger: {
+                    trigger: "#about .stats-bar",
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                onComplete: () => {
+                    // Animate the number counting up
+                    let current = 0;
+                    const increment = target / 40; // 40 steps
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                            element.textContent = target + '+';
+                        } else {
+                            element.textContent = Math.floor(current).toString();
+                        }
+                    }, 30);
+                }
+            });
+        });
+        
+        // Experience Cards - Staggered slide in
+        const experienceCards = document.querySelectorAll(".experience-card");
+        experienceCards.forEach((card, index) => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                x: 0,
+                duration: 0.7,
+                delay: index * 0.15,
+                ease: "power2.out"
+            });
+
+            // Corner accent animation on each card
+            const corners = card.querySelectorAll(".corner-tl, .corner-br");
+            gsap.from(corners, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                },
+                scale: 0,
+                duration: 0.4,
+                delay: 0.5 + (index * 0.15),
+                ease: "back.out(2)"
+            });
+        });
+
+        // Education Cards
+        const educationCards = document.querySelectorAll(".education-card");
+        educationCards.forEach((card, index) => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                delay: index * 0.1,
+                ease: "power2.out"
+            });
+        });
+
+        // Subsection titles - Line draw effect
+        gsap.from(".subsection-title span", {
+            scrollTrigger: {
+                trigger: ".experience-section",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            scaleX: 0,
+            transformOrigin: "left center",
+            duration: 0.6,
+            stagger: 0.2
+        });
+
+        // Tags reveal on scroll
+        gsap.from(".tag", {
+            scrollTrigger: {
+                trigger: ".experience-section",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            scale: 0.8,
+            stagger: 0.03,
+            duration: 0.3,
+            delay: 0.8
+        });
+
+        // Parallax effect on the entire section
+        gsap.to(".about-section", {
+            scrollTrigger: {
+                trigger: ".about-section",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 2
+            },
+            backgroundPosition: "50% 100%"
+        });
+    });
+</script>

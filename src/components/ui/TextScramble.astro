@@ -1,0 +1,73 @@
+---
+// TextScramble.astro - Scramble text effect on hover for elements with data-scramble attribute
+---
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const chars =
+            "!<>-_\\/[]{}—=+*^?#_ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        function scrambleText(element: HTMLElement) {
+            const originalText =
+                element.getAttribute("data-original-text") || element.innerText;
+            element.setAttribute("data-original-text", originalText);
+
+            let iteration = 0;
+            const intervalId = setInterval(() => {
+                element.innerText = originalText
+                    .split("")
+                    .map((char, index) => {
+                        if (index < iteration) {
+                            return originalText[index];
+                        }
+                        if (char === " ") return " ";
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join("");
+
+                if (iteration >= originalText.length) {
+                    clearInterval(intervalId);
+                }
+
+                iteration += 1 / 2;
+            }, 30);
+        }
+
+        // Apply to elements with data-scramble attribute
+        const scrambleElements = document.querySelectorAll("[data-scramble]");
+        scrambleElements.forEach((elem) => {
+            const element = elem as HTMLElement;
+
+            element.addEventListener("mouseenter", () => {
+                scrambleText(element);
+            });
+        });
+
+        // Also apply to section titles on scroll
+        const sectionTitles = document.querySelectorAll(".section-title");
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const title = entry.target as HTMLElement;
+                        // Only scramble once
+                        if (!title.hasAttribute("data-scrambled")) {
+                            title.setAttribute("data-scrambled", "true");
+
+                            // Scramble only the lime-colored span
+                            const limeSpan = title.querySelector(
+                                ".text-lime-400",
+                            ) as HTMLElement;
+                            if (limeSpan) {
+                                scrambleText(limeSpan);
+                            }
+                        }
+                    }
+                });
+            },
+            { threshold: 0.5 },
+        );
+
+        sectionTitles.forEach((title) => observer.observe(title));
+    });
+</script>

@@ -1,0 +1,576 @@
+<div class="background-container">
+    <!-- Interactive Particle Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Scrolling Terminal Logs -->
+    <div class="terminal-logs">
+        <div class="log-column log-col-1">
+            <div class="log-content">
+                <span class="log-entry"
+                    ><span class="text-blue-400">[INFO]</span> Initializing system
+                    core...</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[SUCCESS]</span> Kernel loaded v5.15.0</span
+                >
+                <span class="log-entry"
+                    ><span class="text-blue-400">[INFO]</span> Loading modules: React,
+                    Astro, Tailwind</span
+                >
+                <span class="log-entry"
+                    ><span class="text-yellow-400">[WARN]</span> Optimized build
+                    taking longer than expected</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[SUCCESS]</span> Edorifile Explorer
+                    compiled successfully</span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">[DEBUG]</span> Memory usage at
+                    45%</span
+                >
+                <span class="log-entry"
+                    ><span class="text-blue-400">[INFO]</span> Starting development
+                    server...</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[SUCCESS]</span> Server running
+                    on port 4321</span
+                >
+                <span class="log-entry"
+                    ><span class="text-gray-500">[GIT]</span> Fetching origin/main...</span
+                >
+                <span class="log-entry"
+                    ><span class="text-blue-400">[INFO]</span> Found 3 updated files</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[SUCCESS]</span> Deployment to Vercel
+                    completed</span
+                >
+                <span class="log-entry"
+                    ><span class="text-red-400">[ERROR]</span> Connection timeout
+                    (retrying...)</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[SUCCESS]</span> Reconnected to
+                    Redis cache</span
+                >
+                <span class="log-entry"
+                    ><span class="text-blue-400">[INFO]</span> Running integration
+                    tests...</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[PASS]</span> Auth System (125ms)</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[PASS]</span> Database Queries (42ms)</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[PASS]</span> API Endpoints (89ms)</span
+                >
+                <span class="log-entry"
+                    ><span class="text-blue-400">[INFO]</span> Build finished in
+                    2.4s</span
+                >
+                <span class="log-entry"
+                    ><span class="text-blue-400">[INFO]</span> Initializing system
+                    core...</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[SUCCESS]</span> Kernel loaded v5.15.0</span
+                >
+                <span class="log-entry"
+                    ><span class="text-blue-400">[INFO]</span> Loading modules: React,
+                    Astro, Tailwind</span
+                >
+                <span class="log-entry"
+                    ><span class="text-yellow-400">[WARN]</span> Optimized build
+                    taking longer than expected</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[SUCCESS]</span> Edorifile Explorer
+                    compiled successfully</span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">[DEBUG]</span> Memory usage at
+                    45%</span
+                >
+                <span class="log-entry"
+                    ><span class="text-blue-400">[INFO]</span> Starting development
+                    server...</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[SUCCESS]</span> Server running
+                    on port 4321</span
+                >
+                <span class="log-entry"
+                    ><span class="text-gray-500">[GIT]</span> Fetching origin/main...</span
+                >
+                <span class="log-entry"
+                    ><span class="text-blue-400">[INFO]</span> Found 3 updated files</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[SUCCESS]</span> Deployment to Vercel
+                    completed</span
+                >
+            </div>
+        </div>
+        <div class="log-column log-col-2">
+            <div class="log-content">
+                <span class="log-entry"
+                    ><span class="text-purple-400">></span> pnpm run dev</span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">></span> cargo build --release</span
+                >
+                <span class="log-entry"
+                    ><span class="text-gray-500"
+                        >Compiling tauri-app v1.0.0...</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">Finished</span> release [optimized]
+                    target(s) in 1.2s</span
+                >
+                <span class="log-entry"
+                    ><span class="text-blue-400">[INFO]</span> Connecting to Postgres
+                    database...</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[SUCCESS]</span> Connection established</span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">></span> docker compose up -d</span
+                >
+                <span class="log-entry"
+                    ><span class="text-yellow-400">[WARN]</span> Container 'redis'
+                    is already in use</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[DONE]</span> Container 'postgres'
+                    started</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[DONE]</span> Container 'app' started</span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">></span> git push origin feature/ui-update</span
+                >
+                <span class="log-entry"
+                    ><span class="text-gray-500"
+                        >Enumerating objects: 15, done.</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-gray-500"
+                        >Writing objects: 100% (15/15), 2.45 KiB.</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">remote:</span> Resolving deltas:
+                    100% (5/5)</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">remote:</span> Deployed to production</span
+                >
+                <span class="log-entry"
+                    ><span class="text-blue-400">[INFO]</span> Running garbage collection...</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[SUCCESS]</span> Freed 245MB memory</span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">></span> pnpm run dev</span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">></span> cargo build --release</span
+                >
+                <span class="log-entry"
+                    ><span class="text-gray-500"
+                        >Compiling tauri-app v1.0.0...</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">Finished</span> release [optimized]
+                    target(s) in 1.2s</span
+                >
+                <span class="log-entry"
+                    ><span class="text-blue-400">[INFO]</span> Connecting to Postgres
+                    database...</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[SUCCESS]</span> Connection established</span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">></span> docker compose up -d</span
+                >
+                <span class="log-entry"
+                    ><span class="text-yellow-400">[WARN]</span> Container 'redis'
+                    is already in use</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[DONE]</span> Container 'postgres'
+                    started</span
+                >
+                <span class="log-entry"
+                    ><span class="text-lime-400">[DONE]</span> Container 'app' started</span
+                >
+            </div>
+        </div>
+        <div class="log-column log-col-3">
+            <div class="log-content">
+                <span class="log-entry text-gray-400"
+                    >:: SYSTEM STATUS: ONLINE</span
+                >
+                <span class="log-entry">--------------------------------</span>
+                <span class="log-entry"
+                    ><span class="text-blue-400">::</span> Loading Stack Modules...</span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">::</span> React v18.2.0 <span
+                        class="text-lime-400">[OK]</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">::</span> Node.js v20.10.0 <span
+                        class="text-lime-400">[OK]</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">::</span> TypeScript 5.3 <span
+                        class="text-lime-400">[OK]</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">::</span> Tailwind CSS 3.4 <span
+                        class="text-lime-400">[OK]</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">::</span> Astro 4.0 <span
+                        class="text-lime-400">[OK]</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">::</span> Rust 1.75 <span
+                        class="text-lime-400">[OK]</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">::</span> Python 3.12 <span
+                        class="text-lime-400">[OK]</span
+                    ></span
+                >
+                <span class="log-entry text-gray-400">:: INFRASTRUCTURE</span>
+                <span class="log-entry">--------------------------------</span>
+                <span class="log-entry"
+                    ><span class="text-yellow-400">::</span> Docker 24.0 <span
+                        class="text-lime-400">[RUNNING]</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-yellow-400">::</span> K8s Cluster <span
+                        class="text-lime-400">[ACTIVE]</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-yellow-400">::</span> AWS Region <span
+                        class="text-blue-400">us-east-1</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-yellow-400">::</span> Vercel Edge <span
+                        class="text-lime-400">[CONNECTED]</span
+                    ></span
+                >
+                <span class="log-entry text-gray-400"
+                    >:: SYSTEM STATUS: ONLINE</span
+                >
+                <span class="log-entry">--------------------------------</span>
+                <span class="log-entry"
+                    ><span class="text-blue-400">::</span> Loading Stack Modules...</span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">::</span> React v18.2.0 <span
+                        class="text-lime-400">[OK]</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">::</span> Node.js v20.10.0 <span
+                        class="text-lime-400">[OK]</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">::</span> TypeScript 5.3 <span
+                        class="text-lime-400">[OK]</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">::</span> Tailwind CSS 3.4 <span
+                        class="text-lime-400">[OK]</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">::</span> Astro 4.0 <span
+                        class="text-lime-400">[OK]</span
+                    ></span
+                >
+                <span class="log-entry"
+                    ><span class="text-purple-400">::</span> Rust 1.75 <span
+                        class="text-lime-400">[OK]</span
+                    ></span
+                >
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .background-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        z-index: -1;
+        background-color: var(--color-surface);
+    }
+
+    #particle-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: auto;
+    }
+
+    /* Scrolling Terminal Logs */
+    .terminal-logs {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.15; /* Much lower opacity for texture effect */
+        padding: 0 5%;
+    }
+
+    .log-column {
+        flex: 1;
+        overflow: hidden;
+        font-family: monospace;
+        font-size: 10px; /* Smaller font */
+        line-height: 2.2; /* More spacing */
+        color: rgba(191, 255, 0, 0.2); /* Base subtle lime */
+        white-space: nowrap;
+        padding: 0 2rem;
+        /* Mask to fade out top and bottom */
+        mask-image: linear-gradient(
+            to bottom,
+            transparent,
+            black 20%,
+            black 80%,
+            transparent
+        );
+        -webkit-mask-image: linear-gradient(
+            to bottom,
+            transparent,
+            black 20%,
+            black 80%,
+            transparent
+        );
+    }
+
+    .log-entry {
+        display: block;
+    }
+
+    /* Subtle monochromatic variations instead of rainbow */
+    .text-lime-400 {
+        color: rgba(191, 255, 0, 0.4);
+    }
+    .text-blue-400 {
+        color: rgba(191, 255, 0, 0.3);
+    }
+    .text-purple-400 {
+        color: rgba(191, 255, 0, 0.3);
+    }
+    .text-yellow-400 {
+        color: rgba(191, 255, 0, 0.35);
+    }
+    .text-red-400 {
+        color: rgba(191, 255, 0, 0.35);
+    }
+    .text-gray-400 {
+        color: rgba(255, 255, 255, 0.1);
+    }
+    .text-gray-500 {
+        color: rgba(255, 255, 255, 0.05);
+    }
+
+    .log-content {
+        animation: scrollUp 60s linear infinite;
+    }
+
+    .log-col-1 .log-content {
+        animation-duration: 55s;
+    }
+
+    .log-col-2 .log-content {
+        animation-duration: 70s;
+        animation-delay: -15s;
+    }
+
+    .log-col-3 .log-content {
+        animation-duration: 80s;
+        animation-delay: -30s;
+    }
+
+    @keyframes scrollUp {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-50%);
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById(
+            "particle-canvas",
+        ) as HTMLCanvasElement;
+        if (!canvas) return;
+
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        // Resize canvas
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        // Mouse position
+        let mouse = { x: -1000, y: -1000 };
+        const magnetRadius = 150; // Radius of magnetic attraction
+        const magnetStrength = 0.08; // How strong the pull is
+
+        document.addEventListener("mousemove", (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        document.addEventListener("mouseleave", () => {
+            mouse.x = -1000;
+            mouse.y = -1000;
+        });
+
+        // Particle class
+        class Particle {
+            baseX: number;
+            baseY: number;
+            x: number;
+            y: number;
+            size: number;
+            opacity: number;
+
+            constructor(x: number, y: number) {
+                this.baseX = x;
+                this.baseY = y;
+                this.x = x;
+                this.y = y;
+                this.size = 1.5;
+                this.opacity = 0.15 + Math.random() * 0.15;
+            }
+
+            update() {
+                // Calculate distance to mouse
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < magnetRadius) {
+                    // Magnetic attraction - pull towards mouse
+                    const force = (magnetRadius - distance) / magnetRadius;
+                    const angle = Math.atan2(dy, dx);
+                    const pullX =
+                        Math.cos(angle) * force * magnetStrength * magnetRadius;
+                    const pullY =
+                        Math.sin(angle) * force * magnetStrength * magnetRadius;
+
+                    this.x += (this.baseX + pullX - this.x) * 0.1;
+                    this.y += (this.baseY + pullY - this.y) * 0.1;
+
+                    // Increase opacity when near mouse
+                    this.opacity = Math.min(0.6, 0.15 + force * 0.5);
+                } else {
+                    // Return to base position
+                    this.x += (this.baseX - this.x) * 0.05;
+                    this.y += (this.baseY - this.y) * 0.05;
+                    this.opacity += (0.15 - this.opacity) * 0.05;
+                }
+            }
+
+            draw() {
+                if (!ctx) return;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(191, 255, 0, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        // Create grid of particles
+        const particles: Particle[] = [];
+        const spacing = 30;
+
+        function createParticles() {
+            particles.length = 0;
+            const cols = Math.ceil(canvas.width / spacing) + 1;
+            const rows = Math.ceil(canvas.height / spacing) + 1;
+
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    particles.push(new Particle(i * spacing, j * spacing));
+                }
+            }
+        }
+        createParticles();
+        window.addEventListener("resize", createParticles);
+
+        // Pause canvas when not visible
+        let isVisible = true;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                isVisible = entry.isIntersecting;
+                if (isVisible) animate();
+            },
+            { threshold: 0 },
+        );
+        observer.observe(canvas);
+
+        // Animation loop
+        function animate() {
+            if (!ctx || !isVisible) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((particle) => {
+                particle.update();
+                particle.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    });
+</script>

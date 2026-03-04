@@ -1,0 +1,104 @@
+---
+import Header from "@components/ui/Header.astro";
+import Background from "@components/ui/Background.astro";
+import ScrollAnimations from "@components/ui/ScrollAnimations.astro";
+import ScrollProgressBar from "@components/ui/ScrollProgressBar.astro";
+import MagneticEffect from "@components/ui/MagneticEffect.astro";
+import TextScramble from "@components/ui/TextScramble.astro";
+import "@styles/shared.css";
+import "@fontsource-variable/onest";
+interface Props {
+	title: string;
+	canonicalUrl?: string;
+}
+const { title, canonicalUrl } = Astro.props;
+
+const startYear = 2017;
+const currentYear = new Date().getFullYear();
+const yearsOfExperience = currentYear - startYear;
+const siteUrl = "https://vandev.mx";
+const canonical = canonicalUrl || siteUrl;
+const description = `VanDev — Building cutting-edge software solutions. Expertos en desarrollo web, aplicaciones de escritorio y productos SaaS con Rust, TypeScript y Python.`;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="canonical" href={canonical} />
+		<meta name="generator" content={Astro.generator} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={`${siteUrl}/og-image.png`} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={`${siteUrl}/og-image.png`} />
+		<title>{title}</title>
+		<noscript><style>.page-wrapper { opacity: 1 !important; }</style></noscript>
+	</head>
+	<body>
+		<ScrollProgressBar />
+		<Background />
+		<div class="page-wrapper">
+			<Header />
+			<slot />
+		</div>
+		<ScrollAnimations />
+		<MagneticEffect />
+		<TextScramble />
+	</body>
+</html>
+
+<script>
+	import { gsap } from "gsap";
+
+	document.addEventListener("DOMContentLoaded", () => {
+		// Animación inicial de la página
+		gsap.fromTo(
+			".page-wrapper",
+			{ opacity: 0 },
+			{ opacity: 1, duration: 0.8, ease: "power2.out" },
+		);
+	});
+</script>
+
+<style is:global>
+	:root {
+		color-scheme: light dark;
+		--color-surface: #0a0a08;
+		--color-surface-glass: rgba(10, 10, 8, 0.6);
+		--color-accent: #bfff00;
+		--color-accent-green: #22c55e;
+	}
+
+	html {
+		font-family: "Onest Variable", system-ui, sans-serif;
+		scroll-behavior: smooth;
+	}
+
+	body {
+		background-color: var(--color-surface);
+		position: relative;
+		color: #e2e8f0;
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		overflow-x: hidden;
+	}
+
+	.page-wrapper {
+		opacity: 0; /* Para la animación de entrada */
+		position: relative;
+		z-index: 1;
+	}
+</style>

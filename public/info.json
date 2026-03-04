@@ -1,0 +1,243 @@
+{
+    "name": "VanDev",
+    "title": "Software Development Company",
+    "location": "Nuevo León, Mexico",
+    "contact": {
+        "email": "hola@vandev.mx",
+        "website": "https://vandev.mx",
+        "github": "edoriban",
+        "linkedin": "vandevmx"
+    },
+    "summary": "VanDev es una empresa de desarrollo de software especializada en crear soluciones tecnológicas de vanguardia. Located in Nuevo León, Mexico, we build web applications, desktop tools, and SaaS products using Rust, TypeScript, React, and Python.",
+    "experience": [
+        {
+            "company": "VanDev",
+            "role": "Freelance Software Developer",
+            "location": "Nuevo León, Mexico",
+            "period": "August 2025 - Present",
+            "website": "https://edgar.vandev.mx",
+            "tasks": [
+                "Working as an independent developer on a per-project basis. Building web applications, desktop tools, and SaaS products using Rust, TypeScript, React, and Python."
+            ]
+        },
+        {
+            "company": "Industrial-code",
+            "role": "Software Engineer",
+            "location": "Nuevo León, Mexico",
+            "period": "January 2022 - July 2025",
+            "website": "",
+            "tasks": [
+                "Working as a software engineer on multiple projects. Primarily using TypeScript, React, Node.js, and Python."
+            ]
+        },
+        {
+            "company": "Insytech",
+            "role": "Fullstack Developer",
+            "location": "Nuevo León, Mexico",
+            "period": "July 2018 - August 2025",
+            "website": "",
+            "tasks": [
+                "Fullstack developer responsible for delivering production control software across multiple projects for a transnational automotive manufacturer. Primarily using VBScript, JavaScript, MS SQL Server, and C#."
+            ]
+        },
+        {
+            "company": "TSI",
+            "role": "Junior Developer",
+            "location": "Nuevo León, Mexico",
+            "period": "July 2017 - June 2018",
+            "website": "",
+            "tasks": [
+                "Working as a Junior Developer, with a specific focus on SQL Server database management, establishing communication protocols with Atlas Copco industrial tools, and programming on SCADA software using VBScript."
+            ]
+        }
+    ],
+    "education": [
+        {
+            "institution": "Universidad del Norte, A.C.",
+            "degree": "Software Engineering",
+            "location": "Nuevo León, Mexico",
+            "period": "2015",
+            "details": "Software Engineering, Design Patterns, HTML, CSS, JavaScript, ASP.NET, Entity Framework, SQL Server and others."
+        }
+    ],
+    "projects": [
+        {
+            "name": "InsyKite",
+            "role": "Lead Developer",
+            "description": "Desktop application wrapping a web platform in Tauri for direct local printer access and serial port communication without Chrome API limitations.",
+            "technologies": [
+                "Rust",
+                "Tauri",
+                "TypeScript",
+                "React"
+            ],
+            "url": "",
+            "image": ""
+        },
+        {
+            "name": "Rusteem",
+            "role": "Lead Developer",
+            "description": "Refactoring of a legacy C# system to Rust for high-throughput file processing in machine approval workflows.",
+            "technologies": [
+                "Rust",
+                "C#"
+            ],
+            "url": "",
+            "image": ""
+        },
+        {
+            "name": "VanExplorer",
+            "role": "Personal Project",
+            "description": "Windows file explorer built with Rust and Tauri for high performance and native feel.",
+            "technologies": [
+                "Rust",
+                "Tauri",
+                "React",
+                "TypeScript"
+            ],
+            "url": "https://github.com/edoriban/edorifile-explorer",
+            "image": "/fileExplorer.png"
+        },
+        {
+            "name": "Awesome HMI",
+            "role": "Fullstack Developer",
+            "description": "HMI to display work instructions, process steps, visual aids, help ticket creation, product and material information, and operation times.",
+            "technologies": [
+                "TypeScript",
+                "React",
+                "Node.js",
+                "Electron",
+                "PostgreSQL",
+                "GraphQL"
+            ],
+            "url": "",
+            "image": "/awesomeHMI.png"
+        },
+        {
+            "name": "Auto-Tagger",
+            "role": "Personal Project",
+            "description": "Automatic tagging pipeline using GroundingDINO and SAM for precise YOLOv11 training annotations.",
+            "technologies": [
+                "Python",
+                "YOLOv11",
+                "GroundingDINO",
+                "SAM"
+            ],
+            "url": "",
+            "image": ""
+        },
+        {
+            "name": "Cuarzos.mx",
+            "role": "Lead Developer",
+            "description": "E-commerce platform migrated from WordPress to Next.js and MedusaJS with custom shipping and inventory sync.",
+            "technologies": [
+                "Next.js",
+                "MedusaJS",
+                "TailwindCSS"
+            ],
+            "url": "https://cuarzos.mx",
+            "image": ""
+        },
+        {
+            "name": "VanERP",
+            "role": "Fullstack Developer",
+            "description": "Application for controlling the sale of products and calculating prices by adding percentages.",
+            "technologies": [
+                "TypeScript",
+                "React",
+                "Python",
+                "SQLite"
+            ],
+            "url": "https://github.com/edoriban/vanerp",
+            "image": ""
+        },
+        {
+            "name": "NPS Manufacturing Execution System",
+            "role": "Fullstack Developer",
+            "description": "Web application for managing production control, work orders, visual aids and documentation in a manufacturing environment.",
+            "technologies": [
+                "Visual Basic",
+                "Microsoft SQL Server",
+                "Indusoft Web Studio",
+                "VBScript",
+                "OPC UA, OPC DA"
+            ],
+            "url": "",
+            "image": ""
+        }
+    ],
+    "skills": {
+        "programming_languages": [
+            "TypeScript",
+            "JavaScript",
+            "Rust",
+            "Python",
+            "C#",
+            "VBScript"
+        ],
+        "frameworks_libraries": [
+            "React",
+            "Tauri",
+            "Node.js",
+            "Astro",
+            "Next.js",
+            "FastAPI",
+            "Electron",
+            "Tailwind CSS",
+            "ASP.NET MVC",
+            "Entity Framework",
+            "GraphQL",
+            "Prisma"
+        ],
+        "tools_platforms": [
+            "Git",
+            "Docker",
+            "Redis",
+            "RabbitMQ",
+            "REST APIs",
+            "WebSockets",
+            "OPC-UA",
+            "Serial Communication"
+        ],
+        "databases": [
+            "PostgreSQL",
+            "SQL Server",
+            "MongoDB",
+            "SQLite"
+        ],
+        "ai_ml": [
+            "YOLOv8/v11",
+            "GroundingDINO",
+            "SAM",
+            "AI Agent Skills"
+        ]
+    },
+    "certifications": [
+        {
+            "name": "JavaScript",
+            "issuer": "Platzi",
+            "year": 2022
+        },
+        {
+            "name": "SQL and MySQL",
+            "issuer": "Platzi",
+            "year": 2022
+        },
+        {
+            "name": "Design Fundamentals",
+            "issuer": "Platzi",
+            "year": 2022
+        }
+    ],
+    "languages": [
+        {
+            "name": "Spanish",
+            "level": "Native"
+        },
+        {
+            "name": "English",
+            "level": "Intermediate"
+        }
+    ],
+    "references": "Available upon request"
+}

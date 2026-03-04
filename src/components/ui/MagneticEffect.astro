@@ -1,0 +1,40 @@
+---
+// MagneticEffect.astro - Makes buttons magnetically attract to cursor
+---
+
+<script>
+    import { gsap } from "gsap";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Elements that should have magnetic effect
+        const magneticElements = document.querySelectorAll(
+            ".action-btn-primary, .contact-btn, .resume-btn-brutalist, .cta-button",
+        );
+
+        magneticElements.forEach((elem) => {
+            const element = elem as HTMLElement;
+
+            element.addEventListener("mousemove", (e: MouseEvent) => {
+                const rect = element.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                gsap.to(element, {
+                    x: x * 0.3,
+                    y: y * 0.3,
+                    duration: 0.3,
+                    ease: "power2.out",
+                });
+            });
+
+            element.addEventListener("mouseleave", () => {
+                gsap.to(element, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: "elastic.out(1, 0.3)",
+                });
+            });
+        });
+    });
+</script>

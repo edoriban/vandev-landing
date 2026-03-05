@@ -1,0 +1,92 @@
+---
+import LegalLayout from "@layouts/LegalLayout.astro";
+import { useTranslations } from "@i18n/utils";
+
+const lang = "en";
+const t = useTranslations(lang);
+const siteUrl = "https://vandev.mx";
+---
+
+<LegalLayout
+	title={t("legal.terms.title")}
+	lang={lang}
+	description="VanDev Terms & Conditions. Intellectual property, acceptable use, and limitation of liability for vandev.mx."
+	canonicalUrl={`${siteUrl}/en/terms`}
+	alternateUrl={`${siteUrl}/es/terminos`}
+>
+	<p>Last updated: March 4, 2026</p>
+
+	<h2>1. Acceptance of Terms</h2>
+	<p>
+		By accessing and using the VanDev website (vandev.mx), you agree to these terms
+		and conditions in their entirety. If you do not agree with any of these terms,
+		please do not use this site.
+	</p>
+
+	<h2>2. Description of Services</h2>
+	<p>
+		VanDev offers custom software development services, including but not limited to:
+		web development, desktop applications, SaaS platforms, industrial artificial
+		intelligence solutions, and technology consulting.
+	</p>
+	<p>
+		The information presented on this site is for informational purposes and does not
+		constitute a contractual offer. Specific terms for each project are agreed upon
+		individually with each client.
+	</p>
+
+	<h2>3. Intellectual Property</h2>
+	<p>
+		All content on this website, including but not limited to text, designs, logos,
+		source code, images, and graphic elements, is the property of VanDev /
+		Eduardo Rivas Baños or is used with proper authorization.
+	</p>
+	<p>
+		Reproduction, distribution, or modification of content without prior written
+		authorization is prohibited.
+	</p>
+
+	<h2>4. Acceptable Use</h2>
+	<p>By using this site, you agree to:</p>
+	<ul>
+		<li>Not attempt to access restricted areas of the site or its systems</li>
+		<li>Not use the site for illegal or unauthorized purposes</li>
+		<li>Not interfere with the normal operation of the site</li>
+		<li>Not copy or redistribute content without authorization</li>
+	</ul>
+
+	<h2>5. Limitation of Liability</h2>
+	<p>
+		VanDev does not guarantee that the site will be available uninterrupted or error-free.
+		Content is provided "as is" without warranties of any kind, express or implied.
+	</p>
+	<p>
+		We shall not be liable for direct, indirect, incidental, or consequential damages
+		arising from the use or inability to use this site.
+	</p>
+
+	<h2>6. External Links</h2>
+	<p>
+		This site may contain links to third-party websites (GitHub, LinkedIn).
+		We have no control over the content of these sites and assume no responsibility
+		for them.
+	</p>
+
+	<h2>7. Governing Law</h2>
+	<p>
+		These terms are governed by the laws of the United Mexican States.
+		Any dispute shall be submitted to the competent courts of Nuevo León, México.
+	</p>
+
+	<h2>8. Modifications</h2>
+	<p>
+		We reserve the right to modify these terms at any time.
+		Changes take effect upon publication on this page.
+	</p>
+
+	<h2>9. Contact</h2>
+	<p>
+		For questions about these terms, contact us at
+		<a href="mailto:edoriban@gmail.com">edoriban@gmail.com</a>.
+	</p>
+</LegalLayout>

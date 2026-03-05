@@ -1,0 +1,69 @@
+---
+import LegalLayout from "@layouts/LegalLayout.astro";
+import { useTranslations } from "@i18n/utils";
+
+const lang = "es";
+const t = useTranslations(lang);
+const siteUrl = "https://vandev.mx";
+---
+
+<LegalLayout
+	title={t("legal.cookies.title")}
+	lang={lang}
+	description="Política de Cookies de VanDev. Solo usamos cookies esenciales. Sin analítica, rastreo ni cookies de terceros."
+	canonicalUrl={`${siteUrl}/es/cookies`}
+	alternateUrl={`${siteUrl}/en/cookies`}
+>
+	<p>Última actualización: 4 de marzo de 2026</p>
+
+	<h2>1. ¿Qué son las cookies?</h2>
+	<p>
+		Las cookies son pequeños archivos de texto que se almacenan en tu navegador
+		cuando visitas un sitio web. Se utilizan para recordar preferencias y mejorar
+		la experiencia de navegación.
+	</p>
+
+	<h2>2. Cookies que utilizamos</h2>
+	<p>
+		Este sitio utiliza <strong>únicamente cookies esenciales</strong> almacenadas
+		en localStorage:
+	</p>
+	<ul>
+		<li><strong>vandev-cookie-consent</strong> — Registra tu preferencia sobre el uso de cookies (aceptar/rechazar)</li>
+		<li><strong>vandev-lang</strong> — Guarda tu preferencia de idioma (español/inglés)</li>
+	</ul>
+
+	<h2>3. Cookies que NO utilizamos</h2>
+	<p>Queremos ser transparentes: este sitio <strong>no utiliza</strong>:</p>
+	<ul>
+		<li>Cookies de analítica (Google Analytics, etc.)</li>
+		<li>Cookies de rastreo o publicidad</li>
+		<li>Cookies de terceros</li>
+		<li>Píxeles de seguimiento</li>
+		<li>Fingerprinting del navegador</li>
+	</ul>
+
+	<h2>4. Cómo gestionar las cookies</h2>
+	<p>
+		Puedes eliminar las cookies almacenadas por este sitio en cualquier momento
+		desde la configuración de tu navegador:
+	</p>
+	<ul>
+		<li><strong>Chrome:</strong> Configuración → Privacidad y seguridad → Cookies y otros datos de sitios</li>
+		<li><strong>Firefox:</strong> Configuración → Privacidad y seguridad → Cookies y datos del sitio</li>
+		<li><strong>Safari:</strong> Preferencias → Privacidad → Gestionar datos de sitios web</li>
+		<li><strong>Edge:</strong> Configuración → Privacidad → Cookies y datos del sitio</li>
+	</ul>
+
+	<h2>5. Cambios a esta política</h2>
+	<p>
+		Si en el futuro incorporamos cookies adicionales (por ejemplo, analítica),
+		actualizaremos esta política y solicitaremos tu consentimiento nuevamente.
+	</p>
+
+	<h2>6. Contacto</h2>
+	<p>
+		Para preguntas sobre nuestra política de cookies, contáctanos en
+		<a href="mailto:edoriban@gmail.com">edoriban@gmail.com</a>.
+	</p>
+</LegalLayout>

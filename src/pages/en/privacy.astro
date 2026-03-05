@@ -1,0 +1,87 @@
+---
+import LegalLayout from "@layouts/LegalLayout.astro";
+import { useTranslations } from "@i18n/utils";
+
+const lang = "en";
+const t = useTranslations(lang);
+const siteUrl = "https://vandev.mx";
+---
+
+<LegalLayout
+	title={t("legal.privacy.title")}
+	lang={lang}
+	description="VanDev Privacy Policy. Learn how we protect your personal data under Mexico's LFPDPPP and your ARCO rights."
+	canonicalUrl={`${siteUrl}/en/privacy`}
+	alternateUrl={`${siteUrl}/es/privacidad`}
+>
+	<p>Last updated: March 4, 2026</p>
+
+	<h2>1. Data Controller</h2>
+	<p>
+		<strong>VanDev / Eduardo Rivas Baños</strong><br />
+		Location: Nuevo León, México<br />
+		Contact: <a href="mailto:edoriban@gmail.com">edoriban@gmail.com</a>
+	</p>
+
+	<h2>2. Personal Data We Collect</h2>
+	<p>
+		We only collect the email address you voluntarily provide when contacting us
+		through the mailto link on this site. We do not have contact forms or automated
+		data collection systems.
+	</p>
+
+	<h2>3. Purpose of Data Processing</h2>
+	<p>The personal data you provide is used exclusively to:</p>
+	<ul>
+		<li>Respond to your inquiries about our services</li>
+		<li>Communication related to software development projects</li>
+	</ul>
+
+	<h2>4. Legal Basis</h2>
+	<p>
+		Data processing is based on Mexico's Federal Law on Protection of Personal Data
+		Held by Private Parties (LFPDPPP) and its Regulations.
+	</p>
+
+	<h2>5. ARCO Rights</h2>
+	<p>
+		In accordance with the LFPDPPP, you have the right to exercise your rights of
+		<strong>Access, Rectification, Cancellation, and Opposition (ARCO)</strong> regarding
+		your personal data.
+	</p>
+	<p>
+		To exercise any of these rights, send your request to
+		<a href="mailto:edoriban@gmail.com">edoriban@gmail.com</a> including:
+	</p>
+	<ul>
+		<li>Your full name</li>
+		<li>The right you wish to exercise</li>
+		<li>A clear description of the data you want to exercise the right over</li>
+	</ul>
+	<p>We will respond to your request within a maximum of 20 business days.</p>
+
+	<h2>6. Data Transfer</h2>
+	<p>
+		We do not transfer, share, or sell your personal data to third parties under any
+		circumstances.
+	</p>
+
+	<h2>7. Cookies and Tracking Technologies</h2>
+	<p>
+		This site uses only essential cookies (language preference and cookie consent).
+		We do not use analytics, tracking, or third-party cookies.
+		For more information, see our <a href="/en/cookies">Cookie Policy</a>.
+	</p>
+
+	<h2>8. Changes to This Policy</h2>
+	<p>
+		We reserve the right to modify this privacy policy at any time.
+		Changes will be available on this page with the updated date.
+	</p>
+
+	<h2>9. Contact</h2>
+	<p>
+		If you have questions about this privacy policy or data processing,
+		contact us at <a href="mailto:edoriban@gmail.com">edoriban@gmail.com</a>.
+	</p>
+</LegalLayout>

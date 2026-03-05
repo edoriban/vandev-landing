@@ -1,0 +1,87 @@
+---
+import LegalLayout from "@layouts/LegalLayout.astro";
+import { useTranslations } from "@i18n/utils";
+
+const lang = "es";
+const t = useTranslations(lang);
+const siteUrl = "https://vandev.mx";
+---
+
+<LegalLayout
+	title={t("legal.privacy.title")}
+	lang={lang}
+	description="Aviso de Privacidad de VanDev. Conoce cómo protegemos tus datos personales conforme a la LFPDPPP y tus derechos ARCO."
+	canonicalUrl={`${siteUrl}/es/privacidad`}
+	alternateUrl={`${siteUrl}/en/privacy`}
+>
+	<p>Última actualización: 4 de marzo de 2026</p>
+
+	<h2>1. Responsable del tratamiento</h2>
+	<p>
+		<strong>VanDev / Eduardo Rivas Baños</strong><br />
+		Ubicación: Nuevo León, México<br />
+		Contacto: <a href="mailto:edoriban@gmail.com">edoriban@gmail.com</a>
+	</p>
+
+	<h2>2. Datos personales que recopilamos</h2>
+	<p>
+		Únicamente recopilamos la dirección de correo electrónico que nos proporcionas
+		voluntariamente al contactarnos a través del enlace mailto de este sitio.
+		No contamos con formularios de contacto ni sistemas automatizados de recolección de datos.
+	</p>
+
+	<h2>3. Finalidad del tratamiento</h2>
+	<p>Los datos personales que nos proporcionas se utilizan exclusivamente para:</p>
+	<ul>
+		<li>Responder a tus consultas sobre nuestros servicios</li>
+		<li>Comunicación relacionada con proyectos de desarrollo de software</li>
+	</ul>
+
+	<h2>4. Fundamento legal</h2>
+	<p>
+		El tratamiento de tus datos se fundamenta en la Ley Federal de Protección de Datos
+		Personales en Posesión de los Particulares (LFPDPPP) y su Reglamento.
+	</p>
+
+	<h2>5. Derechos ARCO</h2>
+	<p>
+		De conformidad con la LFPDPPP, tienes derecho a ejercer tus derechos de
+		<strong>Acceso, Rectificación, Cancelación y Oposición (ARCO)</strong> respecto
+		a tus datos personales.
+	</p>
+	<p>
+		Para ejercer cualquiera de estos derechos, envía tu solicitud a
+		<a href="mailto:edoriban@gmail.com">edoriban@gmail.com</a> indicando:
+	</p>
+	<ul>
+		<li>Tu nombre completo</li>
+		<li>El derecho que deseas ejercer</li>
+		<li>Una descripción clara de los datos sobre los que deseas ejercer dicho derecho</li>
+	</ul>
+	<p>Responderemos a tu solicitud en un plazo máximo de 20 días hábiles.</p>
+
+	<h2>6. Transferencia de datos</h2>
+	<p>
+		No transferimos, compartimos ni vendemos tus datos personales a terceros bajo ninguna
+		circunstancia.
+	</p>
+
+	<h2>7. Cookies y tecnologías de rastreo</h2>
+	<p>
+		Este sitio utiliza únicamente cookies esenciales (preferencia de idioma y consentimiento
+		de cookies). No utilizamos cookies analíticas, de rastreo ni de terceros.
+		Para más información, consulta nuestra <a href="/es/cookies">Política de Cookies</a>.
+	</p>
+
+	<h2>8. Cambios al aviso de privacidad</h2>
+	<p>
+		Nos reservamos el derecho de modificar este aviso de privacidad en cualquier momento.
+		Las modificaciones estarán disponibles en esta misma página con la fecha de última actualización.
+	</p>
+
+	<h2>9. Contacto</h2>
+	<p>
+		Si tienes preguntas sobre este aviso de privacidad o el tratamiento de tus datos,
+		contáctanos en <a href="mailto:edoriban@gmail.com">edoriban@gmail.com</a>.
+	</p>
+</LegalLayout>

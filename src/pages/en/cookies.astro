@@ -1,0 +1,66 @@
+---
+import LegalLayout from "@layouts/LegalLayout.astro";
+import { useTranslations } from "@i18n/utils";
+
+const lang = "en";
+const t = useTranslations(lang);
+const siteUrl = "https://vandev.mx";
+---
+
+<LegalLayout
+	title={t("legal.cookies.title")}
+	lang={lang}
+	description="VanDev Cookie Policy. We only use essential cookies. No analytics, tracking, or third-party cookies."
+	canonicalUrl={`${siteUrl}/en/cookies`}
+	alternateUrl={`${siteUrl}/es/cookies`}
+>
+	<p>Last updated: March 4, 2026</p>
+
+	<h2>1. What Are Cookies?</h2>
+	<p>
+		Cookies are small text files stored in your browser when you visit a website.
+		They are used to remember preferences and improve the browsing experience.
+	</p>
+
+	<h2>2. Cookies We Use</h2>
+	<p>
+		This site uses <strong>only essential cookies</strong> stored in localStorage:
+	</p>
+	<ul>
+		<li><strong>vandev-cookie-consent</strong> — Records your cookie preference (accept/reject)</li>
+		<li><strong>vandev-lang</strong> — Stores your language preference (Spanish/English)</li>
+	</ul>
+
+	<h2>3. Cookies We Do NOT Use</h2>
+	<p>We want to be transparent: this site <strong>does not use</strong>:</p>
+	<ul>
+		<li>Analytics cookies (Google Analytics, etc.)</li>
+		<li>Tracking or advertising cookies</li>
+		<li>Third-party cookies</li>
+		<li>Tracking pixels</li>
+		<li>Browser fingerprinting</li>
+	</ul>
+
+	<h2>4. How to Manage Cookies</h2>
+	<p>
+		You can delete cookies stored by this site at any time from your browser settings:
+	</p>
+	<ul>
+		<li><strong>Chrome:</strong> Settings → Privacy and Security → Cookies and other site data</li>
+		<li><strong>Firefox:</strong> Settings → Privacy & Security → Cookies and Site Data</li>
+		<li><strong>Safari:</strong> Preferences → Privacy → Manage Website Data</li>
+		<li><strong>Edge:</strong> Settings → Privacy → Cookies and site data</li>
+	</ul>
+
+	<h2>5. Changes to This Policy</h2>
+	<p>
+		If we add additional cookies in the future (e.g., analytics),
+		we will update this policy and request your consent again.
+	</p>
+
+	<h2>6. Contact</h2>
+	<p>
+		For questions about our cookie policy, contact us at
+		<a href="mailto:edoriban@gmail.com">edoriban@gmail.com</a>.
+	</p>
+</LegalLayout>

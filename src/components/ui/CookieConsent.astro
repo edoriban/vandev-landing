@@ -1,0 +1,90 @@
+---
+import type { Lang } from "@i18n/ui";
+import { useTranslations } from "@i18n/utils";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const cookiesUrl = lang === "es" ? "/es/cookies" : "/en/cookies";
+---
+
+<div
+	id="cookie-banner"
+	role="region"
+	aria-live="polite"
+	aria-label={lang === "es" ? "Consentimiento de cookies" : "Cookie consent"}
+	class="cookie-banner fixed bottom-0 left-0 right-0 z-50 translate-y-full transition-transform duration-500"
+>
+	<div class="max-w-4xl mx-auto px-4 py-4">
+		<div class="relative border border-lime-500/30 bg-black/90 backdrop-blur-md p-4 md:p-5">
+			<!-- Corner brackets -->
+			<div class="absolute -top-[1px] -left-[1px] w-2.5 h-2.5 border-t border-l border-lime-400"></div>
+			<div class="absolute -top-[1px] -right-[1px] w-2.5 h-2.5 border-t border-r border-lime-400"></div>
+			<div class="absolute -bottom-[1px] -left-[1px] w-2.5 h-2.5 border-b border-l border-lime-400"></div>
+			<div class="absolute -bottom-[1px] -right-[1px] w-2.5 h-2.5 border-b border-r border-lime-400"></div>
+
+			<div class="flex flex-col md:flex-row items-start md:items-center gap-4">
+				<div class="flex-1">
+					<p class="font-mono text-xs text-gray-300 leading-relaxed">
+						<span class="text-lime-400/60">&gt;</span> {t("cookie.message")}
+						<a href={cookiesUrl} class="text-lime-400 hover:text-lime-300 underline underline-offset-2 ml-1">
+							{t("footer.cookies")}
+						</a>
+					</p>
+				</div>
+				<div class="flex gap-3 shrink-0">
+					<button
+						id="cookie-reject"
+						class="cookie-btn font-mono text-xs px-4 py-2 border border-gray-600 text-gray-400 hover:border-gray-400 hover:text-gray-200 transition-all duration-200"
+					>
+						{t("cookie.reject")}
+					</button>
+					<button
+						id="cookie-accept"
+						class="cookie-btn font-mono text-xs px-4 py-2 border border-lime-500/60 text-lime-400 bg-lime-400/10 hover:bg-lime-400/20 hover:border-lime-400 transition-all duration-200"
+					>
+						{t("cookie.accept")}
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	const STORAGE_KEY = "vandev-cookie-consent";
+	const banner = document.getElementById("cookie-banner");
+
+	if (banner) {
+		const consent = localStorage.getItem(STORAGE_KEY);
+
+		if (!consent) {
+			requestAnimationFrame(() => {
+				banner.classList.remove("translate-y-full");
+			});
+		}
+
+		const hideBanner = () => {
+			banner.classList.add("translate-y-full");
+		};
+
+		document.getElementById("cookie-accept")?.addEventListener("click", () => {
+			localStorage.setItem(STORAGE_KEY, "accepted");
+			hideBanner();
+		});
+
+		document.getElementById("cookie-reject")?.addEventListener("click", () => {
+			localStorage.setItem(STORAGE_KEY, "rejected");
+			hideBanner();
+		});
+	}
+</script>
+
+<style>
+	.cookie-btn {
+		clip-path: polygon(0 3px, 3px 0, 100% 0, 100% calc(100% - 3px), calc(100% - 3px) 100%, 0 100%);
+	}
+</style>

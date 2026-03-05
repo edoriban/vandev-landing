@@ -1,0 +1,121 @@
+---
+import Layout from "./Layout.astro";
+import FooterSection from "@components/sections/FooterSection.astro";
+import type { Lang } from "@i18n/ui";
+
+interface Props {
+	title: string;
+	lang: Lang;
+	description?: string;
+	canonicalUrl?: string;
+	alternateUrl?: string;
+	jsonLd?: Record<string, unknown>;
+}
+
+const { title, lang, description, canonicalUrl, alternateUrl, jsonLd } = Astro.props;
+const homeUrl = `/${lang}`;
+---
+
+<Layout
+	title={`${title} — VanDev`}
+	lang={lang}
+	description={description}
+	canonicalUrl={canonicalUrl}
+	alternateUrl={alternateUrl}
+	jsonLd={jsonLd}
+>
+	<main class="min-h-screen pt-24 pb-16 px-4">
+		<div class="max-w-4xl mx-auto">
+			<!-- Breadcrumb nav -->
+			<nav aria-label="Breadcrumb" class="mb-8">
+				<ol class="flex items-center gap-2 font-mono text-xs text-gray-500">
+					<li><a href={homeUrl} class="text-lime-400 hover:text-lime-300 transition-colors">VanDev</a></li>
+					<li><span class="text-lime-400/40">/</span></li>
+					<li><span class="text-gray-400">{title}</span></li>
+				</ol>
+			</nav>
+
+			<!-- Device frame container -->
+			<div class="legal-frame relative border border-lime-500/30 bg-black/60 backdrop-blur-sm p-6 md:p-10">
+				<!-- Corner brackets -->
+				<div class="absolute -top-[1px] -left-[1px] w-3 h-3 border-t border-l border-lime-400"></div>
+				<div class="absolute -top-[1px] -right-[1px] w-3 h-3 border-t border-r border-lime-400"></div>
+				<div class="absolute -bottom-[1px] -left-[1px] w-3 h-3 border-b border-l border-lime-400"></div>
+				<div class="absolute -bottom-[1px] -right-[1px] w-3 h-3 border-b border-r border-lime-400"></div>
+
+				<!-- Title bar -->
+				<div class="flex items-center gap-3 mb-8 pb-4 border-b border-lime-500/20">
+					<span class="font-mono text-xs text-lime-400/60">&gt;_</span>
+					<h1 class="font-mono text-xl md:text-2xl font-bold text-white tracking-wider uppercase">
+						{title}<span class="text-lime-400">_</span>
+					</h1>
+				</div>
+
+				<!-- Content -->
+				<div class="legal-content font-mono text-sm text-gray-300 leading-relaxed space-y-6">
+					<slot />
+				</div>
+			</div>
+		</div>
+	</main>
+	<FooterSection lang={lang} />
+</Layout>
+
+<style>
+	.legal-content :global(h2) {
+		font-size: 1.1rem;
+		font-weight: 700;
+		color: #bfff00;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-top: 2rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.legal-content :global(h3) {
+		font-size: 0.95rem;
+		font-weight: 600;
+		color: #e2e8f0;
+		margin-top: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.legal-content :global(p) {
+		color: #94a3b8;
+		line-height: 1.8;
+	}
+
+	.legal-content :global(ul) {
+		list-style: none;
+		padding-left: 1rem;
+	}
+
+	.legal-content :global(li) {
+		color: #94a3b8;
+		position: relative;
+		padding-left: 1rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.legal-content :global(li::before) {
+		content: ">";
+		position: absolute;
+		left: 0;
+		color: #bfff00;
+		opacity: 0.6;
+	}
+
+	.legal-content :global(a) {
+		color: #bfff00;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	.legal-content :global(a:hover) {
+		color: #d4ff4d;
+	}
+
+	.legal-content :global(strong) {
+		color: #e2e8f0;
+	}
+</style>

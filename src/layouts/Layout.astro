@@ -5,57 +5,108 @@ import ScrollAnimations from "@components/ui/ScrollAnimations.astro";
 import ScrollProgressBar from "@components/ui/ScrollProgressBar.astro";
 import MagneticEffect from "@components/ui/MagneticEffect.astro";
 import TextScramble from "@components/ui/TextScramble.astro";
+import CookieConsent from "@components/ui/CookieConsent.astro";
 import "@styles/shared.css";
 import "@fontsource-variable/onest";
+import type { Lang } from "@i18n/ui";
+import { getAlternateLang, getLocalizedPath } from "@i18n/utils";
+
 interface Props {
 	title: string;
+	lang: Lang;
+	description?: string;
 	canonicalUrl?: string;
+	alternateUrl?: string;
+	jsonLd?: Record<string, unknown>;
 }
-const { title, canonicalUrl } = Astro.props;
+const { title, lang, canonicalUrl, alternateUrl, jsonLd } = Astro.props;
 
-const startYear = 2017;
-const currentYear = new Date().getFullYear();
-const yearsOfExperience = currentYear - startYear;
 const siteUrl = "https://vandev.mx";
-const canonical = canonicalUrl || siteUrl;
-const description = `VanDev — Building cutting-edge software solutions. Expertos en desarrollo web, aplicaciones de escritorio y productos SaaS con Rust, TypeScript y Python.`;
+const canonical = canonicalUrl || `${siteUrl}${getLocalizedPath(lang)}`;
+const altLang = getAlternateLang(lang);
+const altHref = alternateUrl || `${siteUrl}${getLocalizedPath(altLang)}`;
+
+const description =
+	Astro.props.description ||
+	(lang === "es"
+		? "VanDev — Desarrollo de software a la medida. Expertos en web, desktop, SaaS y soluciones industriales con IA."
+		: "VanDev — Custom software development. Experts in web, desktop, SaaS, and industrial AI solutions.");
+
+const organizationSchema = {
+	"@context": "https://schema.org",
+	"@type": "ProfessionalService",
+	name: "VanDev",
+	url: siteUrl,
+	logo: `${siteUrl}/favicon.svg`,
+	description: lang === "es"
+		? "Desarrollo de software a la medida. Web, desktop, SaaS y soluciones industriales con IA."
+		: "Custom software development. Web, desktop, SaaS, and industrial AI solutions.",
+	address: {
+		"@type": "PostalAddress",
+		addressRegion: "Nuevo León",
+		addressCountry: "MX",
+	},
+	contactPoint: {
+		"@type": "ContactPoint",
+		contactType: "General",
+		email: "edoriban@gmail.com",
+	},
+	sameAs: [
+		"https://github.com/edoriban",
+		"https://www.linkedin.com/in/edoriban",
+	],
+	foundingDate: "2017",
+};
+
+const pageSchema = jsonLd || organizationSchema;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
 		<link rel="canonical" href={canonical} />
+		<link rel="alternate" hreflang={lang} href={canonical} />
+		<link rel="alternate" hreflang={altLang} href={altHref} />
+		<link rel="alternate" hreflang="x-default" href={`${siteUrl}/es`} />
 		<meta name="generator" content={Astro.generator} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonical} />
-		<meta property="og:image" content={`${siteUrl}/og-image.png`} />
+		<meta property="og:image" content={`${siteUrl}/android-chrome-512x512.png`} />
+		<meta property="og:image:width" content="512" />
+		<meta property="og:image:height" content="512" />
+		<meta property="og:locale" content={lang === "es" ? "es_MX" : "en_US"} />
+		<meta property="og:site_name" content="VanDev" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={`${siteUrl}/og-image.png`} />
+		<meta name="twitter:image" content={`${siteUrl}/android-chrome-512x512.png`} />
 		<title>{title}</title>
+		<script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
 		<noscript><style>.page-wrapper { opacity: 1 !important; }</style></noscript>
 	</head>
 	<body>
 		<ScrollProgressBar />
 		<Background />
 		<div class="page-wrapper">
-			<Header />
+			<Header lang={lang} />
 			<slot />
 		</div>
 		<ScrollAnimations />
 		<MagneticEffect />
 		<TextScramble />
+		<CookieConsent lang={lang} />
 	</body>
 </html>
 
@@ -63,7 +114,6 @@ const description = `VanDev — Building cutting-edge software solutions. Expert
 	import { gsap } from "gsap";
 
 	document.addEventListener("DOMContentLoaded", () => {
-		// Animación inicial de la página
 		gsap.fromTo(
 			".page-wrapper",
 			{ opacity: 0 },

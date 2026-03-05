@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vandev.mx/sitemap-index.xml

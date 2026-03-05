@@ -17,44 +17,36 @@ const projects = [
         description: lang === "es"
             ? "Sistema ERP para control de ventas y cálculo de precios con márgenes porcentuales en cascada."
             : "ERP system for sales control and pricing with cascading percentage-based margins.",
-        languages: ["TypeScript", "React", "Python", "SQLite"],
-        repoUrl: "",
-        challenge: lang === "es"
-            ? "Motor de precios flexible con márgenes en cascada y consultas recursivas en SQLite para propagación de costos en tiempo real."
-            : "Flexible pricing engine with cascading margins and recursive SQLite queries for real-time cost propagation.",
+        outcome: lang === "es"
+            ? "Precios actualizados en segundos en lugar de horas. Cero errores de cálculo en márgenes de venta."
+            : "Pricing updated in seconds instead of hours. Zero margin calculation errors.",
     },
     {
-        name: "VanSkills",
+        name: "VanPOS",
         description: lang === "es"
-            ? "Toolkit de habilidades para agentes IA — instrucciones especializadas que enseñan a asistentes IA a trabajar con frameworks y patrones específicos."
-            : "AI agent skills toolkit — specialized instruction sets that teach AI assistants to work with specific frameworks and patterns.",
-        languages: ["Python", "Markdown", "AI Agents"],
-        repoUrl: "",
-        challenge: lang === "es"
-            ? "Arquitectura modular de skills que funciona entre diferentes runtimes de agentes IA con auto-sync de metadata."
-            : "Modular skill architecture that works across different AI agent runtimes with auto-sync metadata.",
+            ? "Punto de venta conectado a VanERP para tiendas físicas. Control de ventas por sucursal, cortes de caja e inventario en tiempo real."
+            : "Point-of-sale connected to VanERP for physical stores. Per-branch sales control, cash register cuts, and real-time inventory.",
+        outcome: lang === "es"
+            ? "Cada sucursal operando de forma independiente con datos sincronizados al instante. Inventario siempre al día."
+            : "Each branch operating independently with instantly synced data. Inventory always up to date.",
     },
     {
         name: "VanScript",
         description: lang === "es"
-            ? "Descargador de transcripciones de YouTube y transcriptor local con GUI desktop. Pega URLs o selecciona archivos locales para transcribir con Whisper AI."
-            : "YouTube transcript downloader and local file transcriber with modern desktop GUI. Paste URLs or select local files to transcribe with Whisper AI.",
-        languages: ["Python", "CustomTkinter", "Whisper AI"],
-        repoUrl: "",
-        challenge: lang === "es"
-            ? "Integración de faster-whisper con modelo bundled, procesamiento batch de múltiples URLs con manejo de fallos individuales y empaquetado como .exe con PyInstaller."
-            : "Integration of faster-whisper with bundled model, batch processing of multiple URLs with individual failure handling, and .exe packaging with PyInstaller.",
+            ? "Transcriptor de audio y video con IA. Pega URLs de YouTube o selecciona archivos locales para obtener texto listo para usar."
+            : "AI-powered audio and video transcriber. Paste YouTube URLs or select local files to get ready-to-use text.",
+        outcome: lang === "es"
+            ? "Horas de contenido transcritas en minutos. Un clic para pasar de video a texto editable."
+            : "Hours of content transcribed in minutes. One click from video to editable text.",
     },
     {
         name: "VanFood",
         description: lang === "es"
-            ? "Sistema de gestión de pedidos y delivery para restaurantes familiares. Multi-tenant, offline-first, con impresión térmica Bluetooth y sincronización en tiempo real."
-            : "Order and delivery management system for family-owned restaurants. Multi-tenant, offline-first, with Bluetooth thermal printing and real-time sync.",
-        languages: ["React Native", "Expo", "Supabase", "Zustand"],
-        repoUrl: "",
-        challenge: lang === "es"
-            ? "Arquitectura offline-first con cola de operaciones y sync automático, aislamiento multi-tenant con RLS en Postgres, e impresión térmica ESC/POS vía Bluetooth."
-            : "Offline-first architecture with operation queue and auto-sync, multi-tenant isolation with Postgres RLS, and ESC/POS thermal printing via Bluetooth.",
+            ? "Sistema de pedidos y delivery para restaurantes familiares. Funciona sin internet, con impresión de tickets Bluetooth."
+            : "Order and delivery system for family-owned restaurants. Works offline, with Bluetooth ticket printing.",
+        outcome: lang === "es"
+            ? "Restaurantes operando sin interrupciones aunque caiga el internet. Pedidos directos a cocina en segundos."
+            : "Restaurants running smoothly even when internet goes down. Orders to kitchen in seconds.",
     },
 ];
 ---
@@ -126,30 +118,17 @@ const projects = [
                             </div>
 
                             <div class="content-body px-4 py-4 flex-1 flex flex-col">
-                                <p class="project-description text-gray-400 mb-3 flex-1 leading-relaxed text-sm font-mono">
+                                <p class="project-description text-gray-400 mb-4 flex-1 leading-relaxed text-sm font-mono">
                                     &gt; {project.description}
                                 </p>
 
-                                <p class="text-gray-500 mb-4 text-xs font-mono italic">
-                                    // {project.challenge}
+                                <p class="text-lime-400/70 text-xs font-mono">
+                                    &#10003; {project.outcome}
                                 </p>
-
-                                <!-- Technologies -->
-                                <div class="project-languages flex flex-wrap gap-2 mb-4">
-                                    {project.languages.map((lang) => (
-                                        <span class="lang-chip font-mono text-[0.65rem] px-2 py-1 bg-lime-400/10 border border-lime-500/30 text-lime-400 uppercase tracking-wide">
-                                            {lang}
-                                        </span>
-                                    ))}
-                                </div>
-
                             </div>
 
                             <!-- Bottom Status -->
-                            <div class="card-bottombar flex items-center justify-between px-4 py-2 border-t border-lime-500/10 bg-black/60">
-                                <span class="font-mono text-xs text-gray-600">
-                                    {project.languages.length} TECHNOLOGIES
-                                </span>
+                            <div class="card-bottombar flex items-center justify-end px-4 py-2 border-t border-lime-500/10 bg-black/60">
                                 <span class="font-mono text-xs text-lime-400/50">VAN* PRODUCT</span>
                             </div>
                         </div>
@@ -186,13 +165,6 @@ const projects = [
         border-color: rgba(191, 255, 0, 0.5);
         transform: translateY(-8px);
         box-shadow: 0 20px 40px -20px rgba(191, 255, 0, 0.3);
-    }
-
-    /* Lang chip */
-    .lang-chip { transition: all 0.2s ease; }
-    .project-card:hover .lang-chip {
-        background: rgba(191, 255, 0, 0.2);
-        border-color: rgba(191, 255, 0, 0.5);
     }
 
     @media (max-width: 768px) {

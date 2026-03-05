@@ -100,10 +100,10 @@ const year = new Date().getFullYear();
             <div class="font-mono text-xs text-gray-600 flex items-center gap-2">
                 <span class="text-lime-400/40">&gt;</span> {t("footer.bottom")}
             </div>
-            <div class="font-mono text-xs text-gray-600 flex items-center gap-2">
+            <a href={`/${lang}#contact`} class="font-mono text-xs flex items-center gap-2 text-gray-400 hover:text-lime-400 transition-colors group">
                 <span class="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></span>
-                {t("footer.built")}
-            </div>
+                {t("footer.cta")} <span class="text-lime-400 group-hover:translate-x-1 transition-transform">{t("footer.cta.link")}</span>
+            </a>
         </div>
     </div>
 </footer>

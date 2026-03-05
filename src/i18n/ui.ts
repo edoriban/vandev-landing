@@ -93,7 +93,8 @@ export const ui = {
     "footer.cookies": "Cookies",
     "footer.faq": "FAQ",
     "footer.bottom": "MX-NL // RUST · REACT · PYTHON // DESDE 2017",
-    "footer.built": "HECHO CON ASTRO + TAILWIND",
+    "footer.cta": "¿Listo para tu proyecto?",
+    "footer.cta.link": "HABLEMOS →",
 
     // Cookie consent
     "cookie.message":
@@ -195,7 +196,8 @@ export const ui = {
     "footer.cookies": "Cookies",
     "footer.faq": "FAQ",
     "footer.bottom": "MX-NL // RUST · REACT · PYTHON // SINCE 2017",
-    "footer.built": "BUILT WITH ASTRO + TAILWIND",
+    "footer.cta": "Ready for your project?",
+    "footer.cta.link": "LET'S TALK →",
 
     // Cookie consent
     "cookie.message":

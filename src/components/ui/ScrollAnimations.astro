@@ -14,16 +14,13 @@
         // =====================
 
         const sections = document.querySelectorAll(
-            "#about, #skills, #projects, #contact",
+            "#services, #projects, #why-vandev, #contact",
         );
 
         sections.forEach((section) => {
-            // Section title - dramatic scale and fade
             const title = section.querySelector(".section-title");
             if (title) {
-                // Set initial state
                 gsap.set(title, { opacity: 0, y: 60 });
-
                 gsap.to(title, {
                     scrollTrigger: {
                         trigger: title,
@@ -37,14 +34,12 @@
                 });
             }
 
-            // Subsection titles
             const subtitles = section.querySelectorAll(".subsection-title");
             subtitles.forEach((subtitle, index) => {
                 gsap.set(subtitle, {
                     opacity: 0,
                     x: index % 2 === 0 ? -40 : 40,
                 });
-
                 gsap.to(subtitle, {
                     scrollTrigger: {
                         trigger: subtitle,
@@ -60,30 +55,6 @@
         });
 
         // =====================
-        // PROJECT CARDS
-        // =====================
-
-        const projectCards = document.querySelectorAll(
-            ".project-item, .project-card",
-        );
-        projectCards.forEach((card, index) => {
-            gsap.set(card, { opacity: 0, y: 60 });
-
-            gsap.to(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 90%",
-                    toggleActions: "play none none none",
-                },
-                y: 0,
-                opacity: 1,
-                duration: 0.6,
-                delay: index * 0.1,
-                ease: "power2.out",
-            });
-        });
-
-        // =====================
         // CONTACT SECTION
         // =====================
 
@@ -92,7 +63,6 @@
             const contactTitle = contactSection.querySelector(".section-title");
             if (contactTitle) {
                 gsap.set(contactTitle, { opacity: 0, y: 40 });
-
                 gsap.to(contactTitle, {
                     scrollTrigger: {
                         trigger: contactSection,
@@ -109,7 +79,6 @@
             const contactBtn = contactSection.querySelector("a");
             if (contactBtn) {
                 gsap.set(contactBtn, { opacity: 0, y: 30 });
-
                 gsap.to(contactBtn, {
                     scrollTrigger: {
                         trigger: contactSection,

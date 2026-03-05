@@ -1,3 +1,16 @@
+---
+import type { Lang } from "@i18n/ui";
+import { useTranslations } from "@i18n/utils";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
 <header
     id="main-header"
     class="header-main fixed top-0 left-0 right-0 z-50 flex justify-center py-3 transition-all duration-300 ease-in-out"
@@ -7,7 +20,7 @@
         class="header-content flex justify-between items-center w-full max-w-[1120px] px-4"
     >
         <a
-            href="/"
+            href={`/${lang}`}
             aria-label="Go to homepage"
             class="header-logo group"
             id="logo-container"
@@ -16,30 +29,14 @@
                 class="logo-frame relative px-3 py-1.5 border border-lime-500/40 bg-black/60 hover:border-lime-400 transition-all duration-300"
             >
                 <!-- Mini Corner Brackets -->
-                <div
-                    class="absolute -top-[1px] -left-[1px] w-2 h-2 border-t border-l border-lime-400"
-                >
-                </div>
-                <div
-                    class="absolute -top-[1px] -right-[1px] w-2 h-2 border-t border-r border-lime-400"
-                >
-                </div>
-                <div
-                    class="absolute -bottom-[1px] -left-[1px] w-2 h-2 border-b border-l border-lime-400"
-                >
-                </div>
-                <div
-                    class="absolute -bottom-[1px] -right-[1px] w-2 h-2 border-b border-r border-lime-400"
-                >
-                </div>
+                <div class="absolute -top-[1px] -left-[1px] w-2 h-2 border-t border-l border-lime-400"></div>
+                <div class="absolute -top-[1px] -right-[1px] w-2 h-2 border-t border-r border-lime-400"></div>
+                <div class="absolute -bottom-[1px] -left-[1px] w-2 h-2 border-b border-l border-lime-400"></div>
+                <div class="absolute -bottom-[1px] -right-[1px] w-2 h-2 border-b border-r border-lime-400"></div>
 
                 <div class="flex items-center gap-2">
-                    <span class="text-lime-400 font-mono text-xs opacity-60"
-                        >&gt;_</span
-                    >
-                    <span
-                        class="logo-text font-mono font-bold text-sm tracking-wider text-white uppercase"
-                    >
+                    <span class="text-lime-400 font-mono text-xs opacity-60">&gt;_</span>
+                    <span class="logo-text font-mono font-bold text-sm tracking-wider text-white uppercase">
                         VAN<span class="text-lime-400">.DEV</span>
                     </span>
                 </div>
@@ -51,80 +48,30 @@
             id="main-nav"
             class="header-nav hidden md:flex flex-row gap-x-8 text-sm font-medium items-center"
         >
-            <a
-                href="#home"
-                class="nav-link text-gray-300 hover:text-white transition-colors duration-200"
-                >Home</a
-            >
-            <a
-                href="#about"
-                class="nav-link text-gray-300 hover:text-white transition-colors duration-200"
-                >About</a
-            >
-            <a
-                href="#projects"
-                class="nav-link text-gray-300 hover:text-white transition-colors duration-200"
-                >Projects</a
-            >
-            <a
-                href="#contact"
-                class="nav-link text-gray-300 hover:text-white transition-colors duration-200"
-                >Contact</a
-            >
+            <a href="#home" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">
+                {t("nav.home")}
+            </a>
+            <a href="#services" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">
+                {t("nav.services")}
+            </a>
+            <a href="#projects" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">
+                {t("nav.projects")}
+            </a>
+            <a href="#why-vandev" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">
+                {t("nav.why")}
+            </a>
+            <a href="#contact" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">
+                {t("nav.contact")}
+            </a>
             <div class="ml-4">
-                <a
-                    id="download-resume-btn"
-                    class="resume-btn-brutalist group flex items-center gap-2 font-mono font-bold text-sm text-black px-5 py-2.5 bg-gradient-to-r from-lime-400 to-lime-500 hover:from-lime-300 hover:to-lime-400 transition-all duration-300 shadow-[0_0_20px_rgba(191,255,0,0.3)] hover:shadow-[0_0_30px_rgba(191,255,0,0.5)] uppercase tracking-wider"
-                    aria-label="Download resume in PDF"
-                    style="clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); cursor: pointer;"
-                    tabindex="0"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4 transition-transform group-hover:translate-y-0.5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
-                        ></path>
-                    </svg>
-                    CV_
-                </a>
+                <LanguageSwitcher lang={lang} />
             </div>
         </nav>
 
         <!-- Mobile Navigation -->
         <div class="md:hidden flex items-center gap-3">
-            <!-- Mobile Resume Button -->
-            <div class="animated-border">
-                <a
-                    id="download-resume-btn-mobile"
-                    class="resume-btn-mobile flex items-center justify-center p-2.5 rounded-xl border border-lime-500/30 bg-lime-500/10 hover:bg-lime-500/20 backdrop-blur-md transition-all duration-300 text-white"
-                    aria-label="Download resume in PDF"
-                    style="cursor: pointer;"
-                    tabindex="0"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
-                        ></path>
-                    </svg>
-                </a>
-            </div>
+            <!-- Mobile Language Switcher -->
+            <LanguageSwitcher lang={lang} />
 
             <!-- Hamburger Menu Button -->
             <button
@@ -140,11 +87,7 @@
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                 >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
                 <svg
                     id="close-icon"
@@ -153,11 +96,7 @@
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                 >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
         </div>
@@ -169,26 +108,21 @@
         class="mobile-menu md:hidden absolute top-full left-0 right-0 bg-[#020617]/95 backdrop-blur-xl border-b border-lime-500/20 shadow-2xl transform -translate-y-full opacity-0 pointer-events-none transition-all duration-300 ease-in-out z-40"
     >
         <nav class="flex flex-col py-6 px-6 space-y-2">
-            <a
-                href="#home"
-                class="mobile-nav-link text-gray-300 hover:text-white py-3 px-4 rounded-lg hover:bg-lime-500/10 transition-all duration-300"
-                >Home</a
-            >
-            <a
-                href="#about"
-                class="mobile-nav-link text-gray-300 hover:text-white py-3 px-4 rounded-lg hover:bg-lime-500/10 transition-all duration-300"
-                >About</a
-            >
-            <a
-                href="#projects"
-                class="mobile-nav-link text-gray-300 hover:text-white py-3 px-4 rounded-lg hover:bg-lime-500/10 transition-all duration-300"
-                >Projects</a
-            >
-            <a
-                href="#contact"
-                class="mobile-nav-link text-gray-300 hover:text-white py-3 px-4 rounded-lg hover:bg-lime-500/10 transition-all duration-300"
-                >Contact</a
-            >
+            <a href="#home" class="mobile-nav-link text-gray-300 hover:text-white py-3 px-4 rounded-lg hover:bg-lime-500/10 transition-all duration-300">
+                {t("nav.home")}
+            </a>
+            <a href="#services" class="mobile-nav-link text-gray-300 hover:text-white py-3 px-4 rounded-lg hover:bg-lime-500/10 transition-all duration-300">
+                {t("nav.services")}
+            </a>
+            <a href="#projects" class="mobile-nav-link text-gray-300 hover:text-white py-3 px-4 rounded-lg hover:bg-lime-500/10 transition-all duration-300">
+                {t("nav.projects")}
+            </a>
+            <a href="#why-vandev" class="mobile-nav-link text-gray-300 hover:text-white py-3 px-4 rounded-lg hover:bg-lime-500/10 transition-all duration-300">
+                {t("nav.why")}
+            </a>
+            <a href="#contact" class="mobile-nav-link text-gray-300 hover:text-white py-3 px-4 rounded-lg hover:bg-lime-500/10 transition-all duration-300">
+                {t("nav.contact")}
+            </a>
         </nav>
     </div>
 </header>
@@ -196,16 +130,13 @@
 <script>
     import { gsap } from "gsap";
 
-    // Animaciones iniciales del header cuando se carga la página
     document.addEventListener("DOMContentLoaded", () => {
-        // Animar logo
         gsap.fromTo(
             ".header-logo",
             { x: -100, opacity: 0 },
             { x: 0, opacity: 1, duration: 0.8, delay: 0.2, ease: "power2.out" },
         );
 
-        // Animar enlaces de navegación con stagger (solo desktop)
         gsap.fromTo(
             ".nav-link",
             { y: -20, opacity: 0 },
@@ -219,9 +150,8 @@
             },
         );
 
-        // Animar botones de resume (desktop y mobile)
         gsap.fromTo(
-            ".resume-btn, .resume-btn-mobile",
+            ".lang-switcher",
             { scale: 0.8, opacity: 0 },
             {
                 scale: 1,
@@ -232,7 +162,6 @@
             },
         );
 
-        // Animar botón hamburguesa
         gsap.fromTo(
             ".mobile-menu-btn",
             { scale: 0.8, opacity: 0 },
@@ -245,7 +174,6 @@
             },
         );
 
-        // Efectos hover para los enlaces de desktop
         const navLinks = document.querySelectorAll(".nav-link");
         navLinks.forEach((link) => {
             link.addEventListener("mouseenter", () => {
@@ -253,19 +181,6 @@
             });
             link.addEventListener("mouseleave", () => {
                 gsap.to(link, { y: 0, scale: 1, duration: 0.2 });
-            });
-        });
-
-        // Efectos hover para los botones de resume
-        const resumeButtons = document.querySelectorAll(
-            ".resume-btn, .resume-btn-mobile",
-        );
-        resumeButtons.forEach((btn) => {
-            btn.addEventListener("mouseenter", () => {
-                gsap.to(btn, { scale: 1.05, y: -2, duration: 0.2 });
-            });
-            btn.addEventListener("mouseleave", () => {
-                gsap.to(btn, { scale: 1, y: 0, duration: 0.2 });
             });
         });
 
@@ -280,45 +195,20 @@
             isMenuOpen = !isMenuOpen;
 
             if (isMenuOpen) {
-                // Abrir menú
-                mobileMenu?.classList.remove(
-                    "-translate-y-full",
-                    "opacity-0",
-                    "pointer-events-none",
-                );
-                mobileMenu?.classList.add(
-                    "translate-y-0",
-                    "opacity-100",
-                    "pointer-events-auto",
-                );
+                mobileMenu?.classList.remove("-translate-y-full", "opacity-0", "pointer-events-none");
+                mobileMenu?.classList.add("translate-y-0", "opacity-100", "pointer-events-auto");
                 hamburgerIcon?.classList.add("hidden");
                 closeIcon?.classList.remove("hidden");
                 mobileMenuBtn?.setAttribute("aria-expanded", "true");
 
-                // Animar enlaces móviles
                 gsap.fromTo(
                     ".mobile-nav-link",
                     { x: -30, opacity: 0 },
-                    {
-                        x: 0,
-                        opacity: 1,
-                        duration: 0.3,
-                        stagger: 0.1,
-                        ease: "power2.out",
-                    },
+                    { x: 0, opacity: 1, duration: 0.3, stagger: 0.1, ease: "power2.out" },
                 );
             } else {
-                // Cerrar menú
-                mobileMenu?.classList.add(
-                    "-translate-y-full",
-                    "opacity-0",
-                    "pointer-events-none",
-                );
-                mobileMenu?.classList.remove(
-                    "translate-y-0",
-                    "opacity-100",
-                    "pointer-events-auto",
-                );
+                mobileMenu?.classList.add("-translate-y-full", "opacity-0", "pointer-events-none");
+                mobileMenu?.classList.remove("translate-y-0", "opacity-100", "pointer-events-auto");
                 hamburgerIcon?.classList.remove("hidden");
                 closeIcon?.classList.add("hidden");
                 mobileMenuBtn?.setAttribute("aria-expanded", "false");
@@ -327,17 +217,13 @@
 
         mobileMenuBtn?.addEventListener("click", toggleMobileMenu);
 
-        // Cerrar menú al hacer click en enlaces
         const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
         mobileNavLinks.forEach((link) => {
             link.addEventListener("click", () => {
-                if (isMenuOpen) {
-                    toggleMobileMenu();
-                }
+                if (isMenuOpen) toggleMobileMenu();
             });
         });
 
-        // Cerrar menú al hacer click fuera
         document.addEventListener("click", (e) => {
             if (
                 isMenuOpen &&
@@ -374,9 +260,7 @@
     let listenersAdded = false;
     function addListeners() {
         if (!listenersAdded) {
-            document.addEventListener("scroll", throttledScroll, {
-                passive: true,
-            });
+            document.addEventListener("scroll", throttledScroll, { passive: true });
             document.addEventListener("astro:page-load", handleScroll);
             listenersAdded = true;
         }
@@ -394,112 +278,5 @@
         handleScroll();
         window.addEventListener("beforeunload", removeListeners);
         window.addEventListener("astro:page-unload", removeListeners);
-    } else {
-        console.warn("Element with ID 'main-header' not found.");
     }
-</script>
-<script type="module" is:inline>
-    // Load pdfMake on demand
-    let pdfMakeReady = null;
-    function loadPdfMake() {
-        if (pdfMakeReady) return pdfMakeReady;
-        pdfMakeReady = new Promise((resolve, reject) => {
-            const script1 = document.createElement("script");
-            script1.src = "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/pdfmake.min.js";
-            script1.onload = () => {
-                const script2 = document.createElement("script");
-                script2.src = "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/vfs_fonts.js";
-                script2.onload = () => resolve(window.pdfMake);
-                script2.onerror = reject;
-                document.head.appendChild(script2);
-            };
-            script1.onerror = reject;
-            document.head.appendChild(script1);
-        });
-        return pdfMakeReady;
-    }
-
-    // Función para generar PDF
-    async function generatePDF() {
-        try {
-            const [info, module, pdfMake] = await Promise.all([
-                fetch("/info.json").then((res) => res.json()),
-                import("/generateResumePdf.js"),
-                loadPdfMake(),
-            ]);
-
-            if (!pdfMake) {
-                console.error("pdfMake not loaded!");
-                alert(
-                    "Could not generate PDF: PDF library not loaded correctly.",
-                );
-                return;
-            }
-
-            module.generateResumePdf(info, pdfMake);
-        } catch (error) {
-            console.error("Error generating PDF:", error);
-            alert(
-                "There was an error generating your resume. Please try again later.",
-            );
-        }
-    }
-
-    // Agregar evento a ambos botones de descarga
-    const desktopBtn = document.getElementById("download-resume-btn");
-    const mobileBtn = document.getElementById("download-resume-btn-mobile");
-
-    if (desktopBtn) {
-        desktopBtn.addEventListener("click", generatePDF);
-    }
-
-    if (mobileBtn) {
-        mobileBtn.addEventListener("click", generatePDF);
-    }
-
-    // PowerGlitch effect on CV button hover
-    import("powerglitch").then(({ PowerGlitch }) => {
-        const cvBtn = document.getElementById("download-resume-btn");
-        if (!cvBtn) return;
-
-        let glitchInstance = null;
-
-        cvBtn.addEventListener("mouseenter", () => {
-            if (!glitchInstance) {
-                glitchInstance = PowerGlitch.glitch(cvBtn, {
-                    playMode: "always",
-                    createContainers: true,
-                    hideOverflow: false,
-                    timing: {
-                        duration: 200,
-                        iterations: 2,
-                    },
-                    glitchTimeSpan: {
-                        start: 0,
-                        end: 1,
-                    },
-                    shake: {
-                        velocity: 12,
-                        amplitudeX: 0.02,
-                        amplitudeY: 0.02,
-                    },
-                    slice: {
-                        count: 3,
-                        velocity: 12,
-                        minHeight: 0.02,
-                        maxHeight: 0.12,
-                        hueRotate: true,
-                    },
-                });
-            } else {
-                glitchInstance.startGlitch();
-            }
-        });
-
-        cvBtn.addEventListener("mouseleave", () => {
-            if (glitchInstance) {
-                glitchInstance.stopGlitch();
-            }
-        });
-    });
 </script>

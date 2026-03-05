@@ -1,243 +1,110 @@
 ---
-// ProjectsSection.astro
 import "@styles/shared.css";
-import ProjectModal from "@components/ui/ProjectModal.astro";
+import type { Lang } from "@i18n/ui";
+import { useTranslations } from "@i18n/utils";
 
-// Aquí defines manualmente tus proyectos
+interface Props {
+    lang: Lang;
+    vanRepoCount: number;
+}
+
+const { lang, vanRepoCount } = Astro.props;
+const t = useTranslations(lang);
+
 const projects = [
-    // --- Page 1: High-impact, differentiated projects ---
-    {
-        name: "InsyKite",
-        description:
-            "Desktop application wrapping a web platform in Tauri to enable direct local printer access and serial port communication without Chrome API limitations.",
-        image: "",
-        languages: ["Rust", "Tauri", "TypeScript", "React"],
-        category: "rust",
-        readmeExcerpt:
-            "Tauri-based desktop shell for native hardware access — printers and serial devices.",
-        repoUrl: "",
-        demoUrl: "",
-        challenge: "Bridging a full web application to native hardware without rewriting the frontend. Built custom Tauri commands in Rust for direct serial port communication and local printer integration, bypassing Chrome's restrictive Web Serial and Web USB APIs for reliable factory-floor operation.",
-    },
-    {
-        name: "Rusteem",
-        description:
-            "Refactoring of a legacy C# system to Rust for high-throughput file processing in machine approval workflows.",
-        image: "/images/projects/rusteem.webp",
-        languages: ["Rust", "C#", "Systems"],
-        category: "rust",
-        readmeExcerpt:
-            "Legacy C# to Rust migration for high-performance batch file processing.",
-        repoUrl: "",
-        demoUrl: "",
-        challenge: "Replacing a single-threaded C# approval pipeline that couldn't keep up with production volume. Leveraged Rust's async runtime and zero-copy I/O to process thousands of approval files concurrently, reducing batch processing time by orders of magnitude.",
-    },
-    {
-        name: "VanExplorer",
-        description:
-            "Windows file explorer built with Rust and Tauri for high performance and native feel.",
-        image: "/fileExplorer.png",
-        languages: ["Rust", "Tauri", "React", "TypeScript"],
-        category: "rust",
-        readmeExcerpt:
-            "High-performance file explorer for Windows built with Rust and Tauri.",
-        repoUrl: "https://github.com/edoriban/edorifile-explorer",
-        demoUrl: "",
-        challenge: "Achieving native Windows performance (60fps scrolling with 10k+ files) required implementing a virtualized list in React backed by a custom Rust command buffering system to handle file system calls asynchronously without blocking the UI thread.",
-    },
-    {
-        name: "awesomeHMI",
-        description:
-            "HMI to display work instructions, process steps, visual aids, help ticket creation, product and material information, and operation times.",
-        image: "/awesomeHMI.png",
-        languages: ["TypeScript", "React", "Node.js", "Electron", "PostgreSQL"],
-        category: "react",
-        readmeExcerpt:
-            "Interface for control and monitoring of industrial processes, supporting instructions, tickets, and material visualization.",
-        repoUrl: "",
-        demoUrl: "",
-        challenge: "Ensuring 99.9% uptime in a factory environment with unstable network. Built a robust local-first synchronization engine using PouchDB that caches work instructions and syncs with the central Postgres server when connectivity is restored.",
-    },
-    {
-        name: "Auto-Tagger",
-        description:
-            "Automatic tagging pipeline using GroundingDINO and SAM for precise YOLOv11 training annotations.",
-        image: "",
-        languages: ["Python", "YOLOv11", "GroundingDINO", "SAM"],
-        category: "python",
-        readmeExcerpt:
-            "AI-powered auto-labeling tool for computer vision datasets.",
-        repoUrl: "https://github.com/edoriban/auto-tagger",
-        demoUrl: "",
-        challenge: "Integrating three varying model architectures (DINO, SAM, YOLO) into a cohesive pipeline. Solved memory bottlenecks on consumer GPUs by implementing aggressive model offloading and half-precision (FP16) inference wrappers.",
-    },
-    {
-        name: "Cuarzos.mx",
-        description:
-            "E-commerce platform for crystals and quartz, migrated from WordPress to Next.js and MedusaJS for modern performance and custom business logic.",
-        image: "/images/projects/cuarzosmx.webp",
-        languages: ["Next.js", "MedusaJS", "TailwindCSS"],
-        category: "react",
-        readmeExcerpt:
-            "Full e-commerce migration from WordPress to a modern Next.js + MedusaJS stack.",
-        repoUrl: "",
-        demoUrl: "https://cuarzos.mx",
-        challenge: "Complete platform migration from WordPress to Next.js + MedusaJS. Implemented custom shipping calculation modules based on weight and Mexican postal codes, and a real-time inventory sync system with physical store stock.",
-    },
-    // --- Page 2: Solid projects, more conventional ---
-    {
-        name: "VanSkills",
-        description:
-            "AI agent skills toolkit — specialized instruction sets that teach AI assistants how to work with specific frameworks, libraries, and patterns.",
-        image: "",
-        languages: ["Python", "Markdown", "AI Agents"],
-        category: "python",
-        readmeExcerpt:
-            "Open-source toolkit of reusable skills for AI coding assistants.",
-        repoUrl: "https://github.com/edoriban/vanskills",
-        demoUrl: "",
-        challenge: "Designing a modular skill architecture that works across different AI agent runtimes. Built an auto-sync system that introspects skill metadata and generates agent configuration files, enabling plug-and-play skill installation in any project.",
-    },
-    {
-        name: "clientDashboard",
-        description:
-            "Dashboard for devices with YOLOv8 models. View device information, upload new trainings, and manage existing models.",
-        image: "/clientDashboard.jpg",
-        languages: ["TypeScript", "React", "Python"],
-        category: "react",
-        readmeExcerpt:
-            "Control panel for managing inference models and monitoring edge devices.",
-        repoUrl: "",
-        demoUrl: "",
-        challenge: "Real-time state management for multiple edge devices. Implemented WebSockets with a heartbeat mechanism to detect device offline status instantly and update the dashboard UI without manual refreshes.",
-    },
-    {
-        name: "clientStreaming",
-        description:
-            "Application to view YOLOv8 model execution and see real-time detections for each camera with inference stream.",
-        image: "/clientStreaming.jpg",
-        languages: ["TypeScript", "React", "Python", "FastAPI"],
-        category: "python",
-        readmeExcerpt:
-            "Live streaming of inferences and object detections across multiple cameras.",
-        repoUrl: "",
-        demoUrl: "",
-        challenge: "Streaming low-latency MJPEG streams from multiple sources simultaneously. Optimized the Python FastAPI backend to use generator functions and async IO to handle multiple concurrent stream consumers without thread blocking.",
-    },
     {
         name: "VanERP",
-        description:
-            "Application for controlling the sale of products and calculating prices by adding percentages.",
-        image: "/Meditrib.jpg",
+        description: lang === "es"
+            ? "Sistema ERP para control de ventas y cálculo de precios con márgenes porcentuales en cascada."
+            : "ERP system for sales control and pricing with cascading percentage-based margins.",
         languages: ["TypeScript", "React", "Python", "SQLite"],
-        category: "react",
-        readmeExcerpt:
-            "ERP system for product sales control and price calculation.",
-        repoUrl: "https://github.com/edoriban/vanerp",
-        demoUrl: "",
-        challenge: "Building a flexible pricing engine that handles cascading percentage-based markups across product categories. Designed a recursive query system in SQLite for real-time cost propagation from supplier to final sale price.",
+        repoUrl: "",
+        challenge: lang === "es"
+            ? "Motor de precios flexible con márgenes en cascada y consultas recursivas en SQLite para propagación de costos en tiempo real."
+            : "Flexible pricing engine with cascading margins and recursive SQLite queries for real-time cost propagation.",
+    },
+    {
+        name: "VanSkills",
+        description: lang === "es"
+            ? "Toolkit de habilidades para agentes IA — instrucciones especializadas que enseñan a asistentes IA a trabajar con frameworks y patrones específicos."
+            : "AI agent skills toolkit — specialized instruction sets that teach AI assistants to work with specific frameworks and patterns.",
+        languages: ["Python", "Markdown", "AI Agents"],
+        repoUrl: "",
+        challenge: lang === "es"
+            ? "Arquitectura modular de skills que funciona entre diferentes runtimes de agentes IA con auto-sync de metadata."
+            : "Modular skill architecture that works across different AI agent runtimes with auto-sync metadata.",
+    },
+    {
+        name: "VanScript",
+        description: lang === "es"
+            ? "Descargador de transcripciones de YouTube y transcriptor local con GUI desktop. Pega URLs o selecciona archivos locales para transcribir con Whisper AI."
+            : "YouTube transcript downloader and local file transcriber with modern desktop GUI. Paste URLs or select local files to transcribe with Whisper AI.",
+        languages: ["Python", "CustomTkinter", "Whisper AI"],
+        repoUrl: "",
+        challenge: lang === "es"
+            ? "Integración de faster-whisper con modelo bundled, procesamiento batch de múltiples URLs con manejo de fallos individuales y empaquetado como .exe con PyInstaller."
+            : "Integration of faster-whisper with bundled model, batch processing of multiple URLs with individual failure handling, and .exe packaging with PyInstaller.",
     },
     {
         name: "VanFood",
-        description:
-            "Android application for managing a food business — orders, inventory, sales tracking, and daily operations in a single mobile tool.",
-        image: "",
-        languages: ["TypeScript", "React Native", "Mobile"],
-        category: "react",
-        readmeExcerpt:
-            "Mobile-first business management app for food businesses.",
+        description: lang === "es"
+            ? "Sistema de gestión de pedidos y delivery para restaurantes familiares. Multi-tenant, offline-first, con impresión térmica Bluetooth y sincronización en tiempo real."
+            : "Order and delivery management system for family-owned restaurants. Multi-tenant, offline-first, with Bluetooth thermal printing and real-time sync.",
+        languages: ["React Native", "Expo", "Supabase", "Zustand"],
         repoUrl: "",
-        demoUrl: "",
-        challenge: "Building a reliable offline-first mobile experience for environments with intermittent connectivity. Implemented local-first data persistence with background sync to ensure order and inventory accuracy even without network access.",
-    },
-    {
-        name: "Annotation Tool",
-        description:
-            "Application for labeling objects in images, similar to labelme. Allows you to easily and visually create annotation datasets.",
-        image: "/AnnotationTool.jpg",
-        languages: ["TypeScript", "React", "Node.js"],
-        category: "react",
-        readmeExcerpt:
-            "Web tool for image annotation and dataset generation for computer vision model training.",
-        repoUrl: "https://github.com/diconsi/vision-device",
-        demoUrl: "",
-        challenge: "Drawing scalable vector graphics over high-res images with zero lag. Implemented a Canvas API overlay for rendering annotations while keeping the base image as a separate DOM layer to separate concerns and improve redraw performance.",
-    },
-    {
-        name: "Insytech Landing Page",
-        description:
-            "Landing page for Insytech, built with Astro for fast performance and modern web standards.",
-        image: "/insytech.webp",
-        languages: ["Astro", "TypeScript", "CSS"],
-        category: "astro",
-        readmeExcerpt:
-            "Landing page for Insytech, developed using Astro for optimal speed and SEO.",
-        repoUrl: "",
-        demoUrl: "https://insytech.mx/",
-        challenge: "Achieving perfect SEO scores and <1s LCP (Largest Contentful Paint). Utilized Astro's static site generation (SSG) with critical CSS inlining and image optimization pipelines.",
+        challenge: lang === "es"
+            ? "Arquitectura offline-first con cola de operaciones y sync automático, aislamiento multi-tenant con RLS en Postgres, e impresión térmica ESC/POS vía Bluetooth."
+            : "Offline-first architecture with operation queue and auto-sync, multi-tenant isolation with Postgres RLS, and ESC/POS thermal printing via Bluetooth.",
     },
 ];
 ---
 
-<section id="projects" class="relative overflow-hidden pt-4">
-    <div id="particles-js" class="absolute inset-0 -z-10"></div>
+<section id="projects" class="projects-section relative overflow-hidden py-24 scroll-mt-16">
     <div class="container mx-auto px-4 max-w-7xl">
-        
-        <!-- Section Header - Brutalist Device Frame Style -->
+        <!-- Section Header -->
         <div class="projects-header mb-16">
             <div class="header-device-frame relative border border-lime-500/30 bg-black/60 p-8 max-w-2xl overflow-visible">
-                <!-- Corner Brackets - positioned at edges -->
                 <div class="absolute -top-[1px] -left-[1px] w-6 h-6 border-t-2 border-l-2 border-lime-400"></div>
                 <div class="absolute -top-[1px] -right-[1px] w-6 h-6 border-t-2 border-r-2 border-lime-400"></div>
                 <div class="absolute -bottom-[1px] -left-[1px] w-6 h-6 border-b-2 border-l-2 border-lime-400"></div>
-                <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-lime-400 translate-x-[1px] translate-y-[1px]"></div>
-                
+                <div class="absolute -bottom-[1px] -right-[1px] w-6 h-6 border-b-2 border-r-2 border-lime-400"></div>
+
                 <div class="header-tag font-mono text-xs text-lime-400 tracking-widest mb-4">
-                    // PROJECTS.SHOWCASE
+                    {t("projects.tag")}
                 </div>
                 <h2 class="section-title text-5xl md:text-6xl lg:text-7xl font-black text-white leading-none">
-                    MY<br/>
-                    <span class="text-lime-400">WORK_</span>
+                    {t("projects.title.line1")}<br />
+                    <span class="text-lime-400">{t("projects.title.line2")}</span>
                 </h2>
                 <div class="header-status font-mono text-xs text-gray-500 mt-4 flex items-center gap-4">
                     <span class="flex items-center gap-2">
-                        <span class="status-dot w-2 h-2 bg-lime-400 rounded-full animate-pulse"></span>
-                        PROJECTS.LOADED
+                        <span class="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></span>
+                        {t("projects.status")}
                     </span>
                     <span class="text-lime-500/50">|</span>
                     <span>COUNT: {projects.length}</span>
                 </div>
             </div>
         </div>
-        
-        <!-- Filtros por categoría - Terminal Style -->
-        <div class="project-filters mb-12">
-            <div class="filters-frame relative border border-lime-500/20 bg-black/40 p-4 inline-flex flex-wrap gap-2">
-                <div class="filter-label font-mono text-xs text-gray-500 mr-4 flex items-center">
-                    FILTER:
-                </div>
-                <button class="filter-btn active" data-filter="all">&gt; ALL</button>
-                <button class="filter-btn" data-filter="rust">&gt; RUST</button>
-                <button class="filter-btn" data-filter="react">&gt; REACT</button>
-                <button class="filter-btn" data-filter="typescript">&gt; TYPESCRIPT</button>
-                <button class="filter-btn" data-filter="python">&gt; PYTHON</button>
-                <button class="filter-btn" data-filter="nodejs">&gt; NODE.JS</button>
-                <button class="filter-btn" data-filter="astro">&gt; ASTRO</button>
-            </div>
+
+        <!-- Counter Prominent -->
+        <div class="counter-banner mb-12 flex items-center gap-4 font-mono">
+            <span class="text-6xl md:text-8xl font-black text-lime-400">{vanRepoCount}+</span>
+            <span class="text-xl md:text-2xl text-gray-400 uppercase tracking-wider">{t("projects.counter")}</span>
         </div>
 
-        <!-- Grid de proyectos -->
-        <div class="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <!-- Projects Grid -->
+        <div class="projects-grid grid grid-cols-1 md:grid-cols-2 gap-6">
             {projects.map((project, index) => (
-                <article class="project-item group relative" data-categories={project.languages.map(lang => lang.toLowerCase().replace('.', '').replace(' ', '')).join(' ')} data-index={index}>
-                    <!-- Corner Brackets - Outside the card to avoid overflow clip -->
+                <article class="project-item group relative">
+                    <!-- Corner Brackets -->
                     <div class="corner corner-tl"></div>
                     <div class="corner corner-tr"></div>
                     <div class="corner corner-bl"></div>
                     <div class="corner corner-br"></div>
 
                     <div class="project-card h-full flex flex-col relative overflow-hidden">
-                        <!-- Top Bar - Terminal Style -->
+                        <!-- Top Bar -->
                         <div class="card-topbar flex items-center justify-between px-4 py-2 border-b border-lime-500/20 bg-black/80">
                             <div class="flex items-center gap-2 font-mono text-xs">
                                 <span class="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
@@ -249,192 +116,51 @@ const projects = [
                                 <div class="w-2 h-2 rounded-full bg-lime-400"></div>
                             </div>
                         </div>
-                        
-                        <!-- Imagen del proyecto con Scanlines -->
-                        <div
-                            class="project-image-container relative overflow-hidden cursor-pointer"
-                            onclick={`window.openProjectModal(${JSON.stringify(project)})`}
-                            role="button"
-                            tabindex="0"
-                        >
-                            <img
-                                src={project.image || '/images/projects/placeholder.png'}
-                                alt={`${project.name} preview`}
-                                class="project-image w-full h-48 object-cover"
-                                loading="lazy"
-                            />
-                            <!-- Gradient Overlay -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                        </div>
 
-                        <!-- Contenido del proyecto -->
-                        <div class="project-content flex-1 flex flex-col bg-black/80 border-t border-lime-500/10">
-                            <!-- Title Bar -->
+                        <!-- Content -->
+                        <div class="project-content flex-1 flex flex-col bg-black/80">
                             <div class="title-section px-4 py-3 border-b border-lime-500/10">
                                 <h3 class="project-title text-lg font-black text-white group-hover:text-lime-400 transition-colors font-mono uppercase tracking-wide">
                                     {project.name}
                                 </h3>
-                                <div class="project-category font-mono text-xs text-lime-400/50 mt-1">
-                                    // {project.category.toUpperCase()}
-                                </div>
                             </div>
-                            
+
                             <div class="content-body px-4 py-4 flex-1 flex flex-col">
-                                <p class="project-description text-gray-400 mb-4 flex-1 leading-relaxed text-sm font-mono">
+                                <p class="project-description text-gray-400 mb-3 flex-1 leading-relaxed text-sm font-mono">
                                     &gt; {project.description}
                                 </p>
 
-                                <!-- Tecnologías - Chip Style -->
+                                <p class="text-gray-500 mb-4 text-xs font-mono italic">
+                                    // {project.challenge}
+                                </p>
+
+                                <!-- Technologies -->
                                 <div class="project-languages flex flex-wrap gap-2 mb-4">
-                                    {project.languages.slice(0, 4).map((lang) => (
-                                        <span class="lang-chip">
+                                    {project.languages.map((lang) => (
+                                        <span class="lang-chip font-mono text-[0.65rem] px-2 py-1 bg-lime-400/10 border border-lime-500/30 text-lime-400 uppercase tracking-wide">
                                             {lang}
                                         </span>
                                     ))}
                                 </div>
 
-                                <!-- Action Buttons - Brutalist Style -->
-                                <div class="action-buttons flex gap-2 mt-auto">
-                                    {project.repoUrl ? (
-                                        <a
-                                            href={project.repoUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="action-btn action-btn-primary flex-1"
-                                        >
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                                            </svg>
-                                            REPO
-                                        </a>
-                                    ) : (
-                                        <button 
-                                            onclick={`window.openProjectModal(${JSON.stringify(project)})`}
-                                            class="action-btn action-btn-locked flex-1"
-                                        >
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                                            PRIVATE
-                                        </button>
-                                    )}
-                                    
-                                    <button
-                                        onclick={`window.openProjectModal(${JSON.stringify(project)})`}
-                                        class="action-btn action-btn-secondary flex-1"
-                                    >
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                                        DETAILS
-                                    </button>
-                                </div>
                             </div>
-                            
-                            <!-- Bottom Status Bar -->
+
+                            <!-- Bottom Status -->
                             <div class="card-bottombar flex items-center justify-between px-4 py-2 border-t border-lime-500/10 bg-black/60">
                                 <span class="font-mono text-xs text-gray-600">
                                     {project.languages.length} TECHNOLOGIES
                                 </span>
-                                <span class="font-mono text-xs text-lime-400/50">
-                                    {project.demoUrl ? 'LIVE' : project.repoUrl ? 'OPEN_SOURCE' : 'PROPRIETARY'}
-                                </span>
+                                <span class="font-mono text-xs text-lime-400/50">VAN* PRODUCT</span>
                             </div>
                         </div>
                     </div>
                 </article>
             ))}
-            <!-- No Results Message -->
-            <div id="no-results" class="hidden col-span-full py-16 text-center">
-                <div class="font-mono text-lg text-gray-500 mb-2">&gt; No projects match this filter</div>
-                <div class="font-mono text-xs text-lime-400/50">Try selecting a different category</div>
-            </div>
-        </div>
-
-        <!-- Paginación - Terminal Style -->
-        <div class="pagination-controls hidden" id="pagination-controls">
-            <div class="pagination-frame relative border border-lime-500/20 bg-black/40 p-4 flex items-center justify-center gap-6">
-                <button id="prev-page" class="pagination-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                    PREV
-                </button>
-                <div class="page-indicators flex gap-3" id="page-indicators">
-                    <!-- Indicators added by JS -->
-                </div>
-                <button id="next-page" class="pagination-btn">
-                    NEXT
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Stats de proyectos - Terminal Style -->
-        <div class="project-stats mt-12">
-            <div class="stats-frame relative border border-lime-500/10 bg-black/30 px-6 py-3 inline-flex items-center gap-6 font-mono text-xs">
-                <span class="text-gray-500">TOTAL: <span class="text-lime-400">{projects.length}</span></span>
-                <span class="text-lime-500/30">|</span>
-                <span class="text-gray-500">SHOWING: <span class="text-lime-400" id="visible-count">6</span></span>
-                <span class="text-lime-500/30">|</span>
-                <span class="text-gray-500">STATUS: <span class="text-lime-400">READY</span></span>
-            </div>
         </div>
     </div>
-    <!-- Project Modal Component -->
-    <ProjectModal />
 </section>
 
 <style>
-    /* ============================================
-       PROJECTS SECTION - BRUTALIST DEVICE STYLE
-       ============================================ */
-    
-    /* Header Device Frame */
-    .header-device-frame {
-        /* No clip-path - keep angular corners */
-    }
-    
-    /* Filter Buttons */
-    .filter-btn {
-        font-family: monospace;
-        font-size: 0.75rem;
-        padding: 0.5rem 1rem;
-        background: transparent;
-        border: 1px solid rgba(191, 255, 0, 0.2);
-        color: #6b7280;
-        transition: all 0.2s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-    
-    .filter-btn:hover {
-        border-color: rgba(191, 255, 0, 0.5);
-        color: var(--color-accent);
-        background: rgba(191, 255, 0, 0.1);
-    }
-
-    .filter-btn.active {
-        background: rgba(191, 255, 0, 0.2);
-        border-color: rgba(191, 255, 0, 0.6);
-        color: var(--color-accent);
-        box-shadow: 0 0 20px rgba(191, 255, 0, 0.2);
-    }
-
-    /* Project Card */
-    .project-card {
-        background: rgba(0, 0, 0, 0.8);
-        border: 1px solid rgba(191, 255, 0, 0.15);
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    
-    .project-card:hover {
-        border-color: rgba(191, 255, 0, 0.5);
-        transform: translateY(-8px);
-        box-shadow: 
-            0 20px 40px -20px rgba(191, 255, 0, 0.3),
-            0 0 0 1px rgba(191, 255, 0, 0.1),
-            inset 0 1px 0 rgba(191, 255, 0, 0.1);
-    }
-    
     /* Corner Brackets */
     .corner {
         position: absolute;
@@ -444,470 +170,91 @@ const projects = [
         pointer-events: none;
         transition: all 0.3s ease;
     }
-    
-    .corner-tl {
-        top: 0;
-        left: 0;
-        border-top: 2px solid rgba(191, 255, 0, 0.8);
-        border-left: 2px solid rgba(191, 255, 0, 0.8);
+    .corner-tl { top: 0; left: 0; border-top: 2px solid rgba(191, 255, 0, 0.8); border-left: 2px solid rgba(191, 255, 0, 0.8); }
+    .corner-tr { top: 0; right: 0; border-top: 2px solid rgba(191, 255, 0, 0.8); border-right: 2px solid rgba(191, 255, 0, 0.8); }
+    .corner-bl { bottom: 0; left: 0; border-bottom: 2px solid rgba(191, 255, 0, 0.8); border-left: 2px solid rgba(191, 255, 0, 0.8); }
+    .corner-br { bottom: 0; right: 0; border-bottom: 2px solid rgba(191, 255, 0, 0.8); border-right: 2px solid rgba(191, 255, 0, 0.8); }
+    .project-item:hover .corner { border-color: var(--color-accent); }
+
+    /* Project Card */
+    .project-card {
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid rgba(191, 255, 0, 0.15);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .corner-tr {
-        top: 0;
-        right: 0;
-        border-top: 2px solid rgba(191, 255, 0, 0.8);
-        border-right: 2px solid rgba(191, 255, 0, 0.8);
-    }
-    .corner-bl {
-        bottom: 0;
-        left: 0;
-        border-bottom: 2px solid rgba(191, 255, 0, 0.8);
-        border-left: 2px solid rgba(191, 255, 0, 0.8);
-    }
-    .corner-br {
-        bottom: 0;
-        right: 0;
-        border-bottom: 2px solid rgba(191, 255, 0, 0.8);
-        border-right: 2px solid rgba(191, 255, 0, 0.8);
-    }
-    
-    .project-item:hover .corner {
-        border-color: var(--color-accent);
+    .project-card:hover {
+        border-color: rgba(191, 255, 0, 0.5);
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px -20px rgba(191, 255, 0, 0.3);
     }
 
-    /* Project Image */
-    .project-image {
-        filter: grayscale(100%) contrast(1.1);
-        transition: all 0.5s ease;
-    }
-    
-    .project-card:hover .project-image {
-        filter: grayscale(0%) contrast(1);
-        transform: scale(1.05);
-    }
-
-
-    /* Language Chips */
-    .lang-chip {
-        font-family: monospace;
-        font-size: 0.65rem;
-        padding: 0.25rem 0.5rem;
-        background: rgba(191, 255, 0, 0.1);
-        border: 1px solid rgba(191, 255, 0, 0.3);
-        color: var(--color-accent);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        transition: all 0.2s ease;
-    }
-
+    /* Lang chip */
+    .lang-chip { transition: all 0.2s ease; }
     .project-card:hover .lang-chip {
         background: rgba(191, 255, 0, 0.2);
         border-color: rgba(191, 255, 0, 0.5);
     }
 
-    /* Action Buttons */
-    .action-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        font-family: monospace;
-        font-size: 0.7rem;
-        font-weight: 700;
-        padding: 0.625rem 1rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        transition: all 0.3s ease;
-        clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-    }
-    
-    .action-btn-primary {
-        background: linear-gradient(135deg, var(--color-accent), #84cc16);
-        color: #000;
-        border: none;
-    }
-    
-    .action-btn-primary:hover {
-        background: linear-gradient(135deg, #d4ff33, #a3e635);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 20px rgba(191, 255, 0, 0.4);
-    }
-    
-    .action-btn-secondary {
-        background: transparent;
-        border: 1px solid rgba(191, 255, 0, 0.5);
-        color: var(--color-accent);
-    }
-
-    .action-btn-secondary:hover {
-        background: rgba(191, 255, 0, 0.15);
-        border-color: var(--color-accent);
-        transform: translateY(-2px);
-    }
-    
-    .action-btn-locked {
-        background: rgba(75, 85, 99, 0.3);
-        border: 1px solid rgba(75, 85, 99, 0.5);
-        color: #6b7280;
-    }
-    
-    .action-btn-locked:hover {
-        background: rgba(75, 85, 99, 0.5);
-        border-color: rgba(75, 85, 99, 0.8);
-    }
-
-    /* Pagination */
-    .pagination-btn {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-family: monospace;
-        font-size: 0.75rem;
-        padding: 0.75rem 1.5rem;
-        background: transparent;
-        border: 1px solid rgba(191, 255, 0, 0.3);
-        color: var(--color-accent);
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-    }
-    
-    .pagination-btn:hover:not(:disabled) {
-        background: rgba(191, 255, 0, 0.1);
-        border-color: rgba(191, 255, 0, 0.6);
-    }
-    
-    .pagination-btn:disabled {
-        opacity: 0.3;
-        cursor: not-allowed;
-    }
-    
-    .page-dot {
-        width: 12px;
-        height: 12px;
-        background: rgba(191, 255, 0, 0.2);
-        border: 1px solid rgba(191, 255, 0, 0.3);
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-    
-    .page-dot.active {
-        background: var(--color-accent);
-        border-color: var(--color-accent);
-        box-shadow: 0 0 10px rgba(191, 255, 0, 0.5);
-    }
-    
-    .page-dot:hover:not(.active) {
-        background: rgba(191, 255, 0, 0.4);
-    }
-
-    /* Hidden State */
-    .project-item.hidden {
-        display: none;
-    }
-
-    /* Responsive */
     @media (max-width: 768px) {
-        .projects-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-        
-        .filter-btn {
-            padding: 0.375rem 0.75rem;
-            font-size: 0.65rem;
-        }
-        
-        .action-btn {
-            padding: 0.5rem 0.75rem;
-            font-size: 0.65rem;
-        }
-        
-        .header-device-frame {
-            padding: 1.5rem;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-        }
+        .projects-grid { grid-template-columns: 1fr; }
+        .counter-banner span:first-child { font-size: 3rem; }
     }
 </style>
 
 <script>
-    import gsap from 'gsap';
-    import { ScrollTrigger } from 'gsap/ScrollTrigger';
-    
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
     gsap.registerPlugin(ScrollTrigger);
 
-    document.addEventListener("DOMContentLoaded", function () {
-        // --- GSAP ANIMATIONS ---
-        
-        // Header Animation
-        gsap.set('.header-device-frame', { opacity: 0, x: -50 });
-        gsap.set('.header-device-frame .corner', { scale: 0 });
-        gsap.set('.section-title', { opacity: 0, y: 30 });
-        gsap.set('.header-tag', { opacity: 0, x: -20 });
-        gsap.set('.header-status', { opacity: 0 });
-        
-        const headerTl = gsap.timeline({
-            scrollTrigger: {
-                trigger: '.projects-header',
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-            }
-        });
-        
-        headerTl
-            .to('.header-device-frame', { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' })
-            .to('.header-device-frame .corner', { scale: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.7)' }, '-=0.3')
-            .to('.header-tag', { opacity: 1, x: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2')
-            .to('.section-title', { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, '-=0.3')
-            .to('.header-status', { opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.2');
-        
-        // Filter Buttons Animation
-        gsap.set('.filter-btn', { opacity: 0, y: 20 });
-        gsap.to('.filter-btn', {
-            opacity: 1,
-            y: 0,
-            duration: 0.4,
-            stagger: 0.05,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: '.project-filters',
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            }
-        });
-        
-        // Project Cards Animation
-        const projectCards = document.querySelectorAll('.project-item');
+    document.addEventListener("DOMContentLoaded", () => {
+        // Header animation
+        const headerFrame = document.querySelector("#projects .header-device-frame");
+        if (headerFrame) {
+            gsap.set(headerFrame, { opacity: 0, x: -50 });
+            gsap.to(headerFrame, {
+                scrollTrigger: { trigger: "#projects", start: "top 80%", toggleActions: "play none none none" },
+                opacity: 1, x: 0, duration: 0.6, ease: "power3.out",
+            });
+        }
+
+        // Counter animation
+        const counter = document.querySelector(".counter-banner");
+        if (counter) {
+            gsap.set(counter, { opacity: 0, y: 30 });
+            gsap.to(counter, {
+                scrollTrigger: { trigger: counter, start: "top 85%", toggleActions: "play none none none" },
+                opacity: 1, y: 0, duration: 0.6, ease: "power3.out",
+            });
+        }
+
+        // Project cards stagger
+        const projectCards = document.querySelectorAll("#projects .project-item");
         projectCards.forEach((card, index) => {
             gsap.set(card, { opacity: 0, y: 50, scale: 0.95 });
             gsap.to(card, {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.6,
-                delay: (index % 6) * 0.1,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 90%',
-                    toggleActions: 'play none none none'
-                }
-            });
-        });
-        
-        // --- PAGINATION & FILTER LOGIC ---
-        const ITEMS_PER_PAGE = 6;
-        let currentPage = 1;
-        let filteredItems: HTMLElement[] = [];
-        
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const projectItems = Array.from(document.querySelectorAll('.project-item')) as HTMLElement[];
-        const visibleCountElement = document.getElementById('visible-count');
-        const noResultsEl = document.getElementById('no-results');
-        const paginationControls = document.getElementById('pagination-controls');
-        const prevBtn = document.getElementById('prev-page');
-        const nextBtn = document.getElementById('next-page');
-        const pageIndicators = document.getElementById('page-indicators');
-
-        // Initial Setup
-        init();
-
-        function init() {
-            filteredItems = projectItems;
-            render();
-        }
-
-        function filterProjects(category: string) {
-            currentPage = 1; 
-            
-            if (category === 'all') {
-                filteredItems = projectItems;
-            } else {
-                filteredItems = projectItems.filter(item => {
-                    const categories = item.dataset.categories || "";
-                    return categories.includes(category);
-                });
-            }
-            render();
-        }
-
-        function render() {
-            projectItems.forEach(item => item.classList.add('hidden'));
-
-            if (filteredItems.length === 0) {
-                noResultsEl?.classList.remove('hidden');
-                if (visibleCountElement) visibleCountElement.textContent = '0';
-                updatePaginationControls(0);
-                return;
-            }
-            noResultsEl?.classList.add('hidden');
-
-            const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
-
-            if (currentPage > totalPages) currentPage = totalPages || 1;
-            if (currentPage < 1) currentPage = 1;
-
-            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-            const endIndex = startIndex + ITEMS_PER_PAGE;
-
-            const visibleItems = filteredItems.slice(startIndex, endIndex);
-            visibleItems.forEach((item, index) => {
-                item.classList.remove('hidden');
-                // Animate in with GSAP
-                gsap.fromTo(item, 
-                    { opacity: 0, y: 30, scale: 0.95 },
-                    { opacity: 1, y: 0, scale: 1, duration: 0.5, delay: index * 0.08, ease: 'power3.out' }
-                );
-            });
-
-            if (visibleCountElement) {
-                visibleCountElement.textContent = String(visibleItems.length);
-            }
-
-            updatePaginationControls(totalPages);
-        }
-
-        function updatePaginationControls(totalPages: number) {
-            if (!paginationControls || !pageIndicators || !prevBtn || !nextBtn) return;
-            
-            if (totalPages <= 1) {
-                paginationControls.classList.add('hidden');
-            } else {
-                paginationControls.classList.remove('hidden');
-                
-                pageIndicators.innerHTML = '';
-                for (let i = 1; i <= totalPages; i++) {
-                    const dot = document.createElement('div');
-                    dot.className = `page-dot ${i === currentPage ? 'active' : ''}`;
-                    dot.addEventListener('click', () => {
-                        currentPage = i;
-                        render();
-                        scrollToGrid();
-                    });
-                    pageIndicators.appendChild(dot);
-                }
-
-                (prevBtn as HTMLButtonElement).disabled = currentPage === 1;
-                (nextBtn as HTMLButtonElement).disabled = currentPage === totalPages;
-            }
-        }
-        
-        function scrollToGrid() {
-            const grid = document.querySelector('.projects-grid');
-            if (grid) {
-                grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
-
-        // Event Listeners
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                filterProjects((button as HTMLElement).dataset.filter || 'all');
+                scrollTrigger: { trigger: card, start: "top 90%", toggleActions: "play none none none" },
+                opacity: 1, y: 0, scale: 1, duration: 0.6, delay: index * 0.1, ease: "power3.out",
             });
         });
 
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                currentPage--;
-                render();
-                scrollToGrid();
-            });
-        }
+        // 3D tilt
+        projectCards.forEach((item) => {
+            const card = item.querySelector(".project-card") as HTMLElement;
+            if (!card) return;
 
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                currentPage++;
-                render();
-                scrollToGrid();
-            });
-        }
-
-        // --- 3D TILT EFFECT ---
-        projectItems.forEach(item => {
-            const card = item.querySelector('.project-card') as HTMLElement;
-            if(!card) return;
-
-            item.addEventListener('mousemove', (e: MouseEvent) => {
+            item.addEventListener("mousemove", (e: Event) => {
+                const mouseEvent = e as MouseEvent;
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                // Max rotation +/- 3 deg (subtle)
-                const rotateX = ((y - centerY) / centerY) * -3; 
-                const rotateY = ((x - centerX) / centerX) * 3;
-
-                gsap.to(card, {
-                    rotateX: rotateX,
-                    rotateY: rotateY,
-                    scale: 1.02,
-                    duration: 0.3,
-                    ease: 'power2.out',
-                    transformPerspective: 1000
-                });
+                const x = mouseEvent.clientX - rect.left;
+                const y = mouseEvent.clientY - rect.top;
+                const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -3;
+                const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 3;
+                gsap.to(card, { rotateX, rotateY, scale: 1.02, duration: 0.3, ease: "power2.out", transformPerspective: 1000 });
             });
 
-            item.addEventListener('mouseleave', () => {
-                gsap.to(card, {
-                    rotateX: 0,
-                    rotateY: 0,
-                    scale: 1,
-                    duration: 0.5,
-                    ease: 'power3.out'
-                });
-            });
-        });
-        
-        // --- POWERGLITCH EFFECT ON IMAGES ---
-        import('powerglitch').then(({ PowerGlitch }) => {
-            projectItems.forEach(item => {
-                const image = item.querySelector('.project-image') as HTMLImageElement;
-                if (!image) return;
-                
-                let glitchInstance: any = null;
-                
-                item.addEventListener('mouseenter', () => {
-                    if (!glitchInstance) {
-                        glitchInstance = PowerGlitch.glitch(image, {
-                            playMode: 'always',
-                            createContainers: true,
-                            hideOverflow: true,
-                            timing: {
-                                duration: 300,
-                                iterations: 3
-                            },
-                            glitchTimeSpan: {
-                                start: 0,
-                                end: 1
-                            },
-                            shake: {
-                                velocity: 10,
-                                amplitudeX: 0.02,
-                                amplitudeY: 0.02
-                            },
-                            slice: {
-                                count: 4,
-                                velocity: 12,
-                                minHeight: 0.02,
-                                maxHeight: 0.1,
-                                hueRotate: true
-                            }
-                        });
-                    } else {
-                        glitchInstance.startGlitch();
-                    }
-                });
-                
-                item.addEventListener('mouseleave', () => {
-                    if (glitchInstance) {
-                        glitchInstance.stopGlitch();
-                    }
-                });
+            item.addEventListener("mouseleave", () => {
+                gsap.to(card, { rotateX: 0, rotateY: 0, scale: 1, duration: 0.5, ease: "power3.out" });
             });
         });
     });

@@ -1,0 +1,30 @@
+---
+import type { Lang } from "@i18n/ui";
+import { getAlternateLang, getLocalizedPath } from "@i18n/utils";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const altLang = getAlternateLang(lang);
+const altPath = getLocalizedPath(altLang);
+---
+
+<a
+    href={altPath}
+    class="lang-switcher group flex items-center gap-1.5 font-mono font-bold text-sm px-4 py-2.5 border border-lime-500/40 bg-black/60 hover:border-lime-400 hover:bg-lime-400/10 transition-all duration-300 text-white uppercase tracking-wider"
+    aria-label={`Switch to ${altLang === "en" ? "English" : "Español"}`}
+>
+    <span class="text-lime-400 text-xs opacity-60">[</span>
+    <span class="text-gray-400 group-hover:text-gray-300 transition-colors">{lang.toUpperCase()}</span>
+    <span class="text-lime-400 text-xs">→</span>
+    <span class="text-lime-400 font-bold">{altLang.toUpperCase()}</span>
+    <span class="text-lime-400 text-xs opacity-60">]</span>
+</a>
+
+<style>
+    .lang-switcher {
+        clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+    }
+</style>

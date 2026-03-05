@@ -1,0 +1,26 @@
+---
+import Layout from "@layouts/Layout.astro";
+import HeroSection from "@components/sections/HeroSection.astro";
+import ServicesSection from "@components/sections/ServicesSection.astro";
+import ProjectsSection from "@components/sections/ProjectsSection.astro";
+import WhyVanDevSection from "@components/sections/WhyVanDevSection.astro";
+import ContactSection from "@components/sections/ContactSection.astro";
+import FooterSection from "@components/sections/FooterSection.astro";
+import { getVanRepoCount } from "../../lib/github";
+
+const lang = "es";
+const vanRepoCount = await getVanRepoCount();
+---
+
+<Layout title="VanDev — Desarrollo de Software a la Medida" lang={lang}>
+	<main>
+		<div id="home" class="scroll-mt-16">
+			<HeroSection lang={lang} vanRepoCount={vanRepoCount} />
+		</div>
+		<ServicesSection lang={lang} />
+		<ProjectsSection lang={lang} vanRepoCount={vanRepoCount} />
+		<WhyVanDevSection lang={lang} />
+		<ContactSection lang={lang} />
+		<FooterSection lang={lang} />
+	</main>
+</Layout>
